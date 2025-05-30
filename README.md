@@ -16,7 +16,7 @@ You're ready to go!
 
 1. Run the bot with `python bot.py`. This will automatically randomly generate (or load, if files have already been created!) boards for each team listed in `TEAMS_LIST` in `config.py` -- make sure you've appropriately paired up the teams against each other in the `TEAM_PAIRS` dictionary.
 
-2. Boards are, by default, **unlocked**, meaning anyone on a team can add or remove boats on the boards using the `!place` and `!remove` commands. (See below for a more in-depth guide on the bot commands.) Those with admin powers / the "refs" role can `!lockboard` and `!unlockboard` in the team channels to lock or unlock that team's board.
+2. Boards are, by default, **unlocked**, meaning anyone on a team can add or remove boats on the boards using the `!place` and `!remove` commands. (See below for a more in-depth guide on the bot commands.) Those with admin powers / the "refs" role can `!lockboard` and `!unlockboard` in the team channels to lock or unlock that team's board. Run `!intro` to broadcast the introductory details to all team channels and introduce the players to their ship-placing commands.
 
 3. Once all five boats have been placed for each team and whatever amount of time you've allotted the players to strategize and place boats has passed, run the `!lockboard` commands in each channel.
 
@@ -28,11 +28,11 @@ You're ready to go!
 
 - **!shiptypes**: Show ship types and sizes.
 - **!view_board**: View your team's current board.
-- **!team**: Show your team name.
 - **!place [ship] [h/v] [starting coord]**: Place a ship on your board. Example: `!place carrier h A,3`.
 - **!remove [ship]**: Remove a ship from your board.
-- **!lockboard [team]**: Lock the board to prevent changes. Requires the "Refs" role.
-- **!unlockboard [team]**: Unlock the board to allow changes. Requires the "Refs" role.
+- **!intro**: Broadcast the introductory details to all team channels. Requires the "Refs" role.
+- **!lockboard**: Lock the board to prevent changes. Requires the "Refs" role.
+- **!unlockboard**: Unlock the board to allow changes. Requires the "Refs" role.
 - **!team_progress**: Show overall progress of teams. Requires the "Refs" role.
 - **!current_task**: Show your team's current task.
 - **!select [coord]**: Select a coordinate to shoot at. Example: `!select B,5`.

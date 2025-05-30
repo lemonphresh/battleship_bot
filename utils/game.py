@@ -1,13 +1,14 @@
 import json
-from pathlib import Path
-import random
 import os
+import random
 from datetime import datetime, timedelta, timezone
+from pathlib import Path
 
 import config
 
+# Constants
 DATA_DIR = Path("data")
-COOLDOWN_MINUTES = 20
+COOLDOWN_MINUTES = 10
 SHIP_EMOJIS = {
     "carrier": "🟪",      # purple square
     "battleship": "🟥",   # red square
@@ -16,6 +17,39 @@ SHIP_EMOJIS = {
     "destroyer": "⬛"     # black square
 }
 WATER_EMOJI = "🟦"  # blue square for unplaced water tile
+
+# Global cooldown tracker
+last_shot_time = {}
+
+# Utility Functions
+def board_path(team):
+    return os.path.join("data", f"board_{team}.json")
+
+def load_board(team):
+    path = board_path(team)
+    if not os.path.exists(path):
+        return {}
+    with open(path, "r") as f:
+        return json.load(f)
+
+def load_tiles():
+    with open(DATA_DIR / "base_tiles.json") as f:
+        return json.load(f)["tiles"]
+
+# Board Management Functions
+def generate_board():
+    tiles = load_tiles()
+    assert len(tiles) >= 100, "Need at least 100 tiles"
+    random.shuffle(tiles)
+    board = {}
+    rows = "ABCDEFGHIJ"
+
+    for i in range(10):
+        for j in range(10):
+            coord = f"{rows[i]}{j+1}"
+            board[coord] = tiles.pop()
+    
+    return {"tiles": board}
 
 def all_ships_placed(board, required_ships):
     placed = set(board.get("ships", {}).keys())
@@ -37,59 +71,7 @@ def unlock_board(board):
     board["locked"] = False
     return "✅ Board is now unlocked. Changes are allowed."
 
-def load_board(team):
-    path = f"data/board_{team}.json"
-    if not os.path.exists(path):
-        return {}
-    with open(path, "r") as f:
-        return json.load(f)
-
-def load_tiles():
-    with open(DATA_DIR / "base_tiles.json") as f:
-        return json.load(f)["tiles"]
-    
-def generate_board():
-    tiles = load_tiles()
-    assert len(tiles) >= 100, "Need at least 100 tiles"
-    random.shuffle(tiles)
-    board = {}
-    rows = "ABCDEFGHIJ"
-
-    for i in range(10):
-        for j in range(10):
-            coord = f"{rows[i]}{j+1}"
-            board[coord] = tiles.pop()
-    
-    return {"tiles": board} 
-
-def render_board_preview(board, required_ships=None):
-    rows = "ABCDEFGHIJ"
-    preview = "```\n  " + " ".join(f"{i+1:2}" for i in range(10)) + "\n"
-    for r in rows:
-        line = f"{r} "
-        for c in range(1, 11):
-            coord = f"{r}{c}"
-            tile = board["tiles"].get(coord, {})
-            if tile.get("ship"):
-                ship_type = tile["ship"]
-                emoji = SHIP_EMOJIS.get(ship_type, "❓")
-                line += emoji + " "
-            else:
-                line += WATER_EMOJI + " "
-        preview += line + "\n"
-    preview += "```"
-
-    if not board.get("locked", False) and required_ships:
-        placed_ships = set(board.get("ships", {}).keys())
-        remaining_ships = set(required_ships) - placed_ships
-        if remaining_ships:
-            preview += "\nRemaining ships to place: **" + ", ".join(remaining_ships) + "**"
-
-    return preview
-
-def board_path(team):
-    return os.path.join("data", f"board_{team}.json")
-
+# Ship Placement and Removal Functions
 def place_ship(board, ship_type, orientation, start_coord, ship_definitions):
     if board.get("locked", False):
         return "❌ Board is locked. Cannot place ships."
@@ -133,12 +115,11 @@ def place_ship(board, ship_type, orientation, start_coord, ship_definitions):
         coords.append(coord)
 
     for i, coord in enumerate(coords):
-        # save previous tile data before overwriting
         original_tile = board["tiles"][coord].copy()
         board["tiles"][coord] = {
             **ship_tiles[i],
             "ship": ship_type,
-            "previous_tile": original_tile,  # save old tile here
+            "previous_tile": original_tile,
         }
 
     board.setdefault("ships", {})[ship_type] = coords
@@ -156,36 +137,31 @@ def remove_ship(board, ship_type):
         tile = board["tiles"].get(coord, {})
         prev = tile.get("previous_tile")
         if prev:
-            # restore previous tile data
             board["tiles"][coord] = prev
         else:
-            # if no previous tile, clear ship info
             board["tiles"][coord]["ship"] = None
             board["tiles"][coord].pop("ship_tile_data", None)
 
     del board["ships"][ship_type]
     return f"✅ Removed {ship_type.capitalize()}."
 
+# File Operations for Ship Placement and Removal
 def place_ship_to_file(team_name, ship_type, orientation, start_coord, ship_definitions, board_dir="data"):
     file_path = os.path.join(board_dir, f"board_{team_name}.json")
 
-    # load the board
     if not os.path.exists(file_path):
         return f"❌ Board file for team '{team_name}' not found."
 
     with open(file_path, "r") as f:
         board = json.load(f)
 
-    # place the ship
     result = place_ship(board, ship_type, orientation, start_coord, ship_definitions)
 
-    # save the board back if successful
     if result.startswith("✅"):
         with open(file_path, "w") as f:
             json.dump(board, f, indent=2)
 
     return result
-
 
 def remove_ship_from_file(team_name, ship_type, board_dir="data"):
     file_path = os.path.join(board_dir, f"board_{team_name}.json")
@@ -204,11 +180,7 @@ def remove_ship_from_file(team_name, ship_type, board_dir="data"):
 
     return result
 
-
-# global cooldown tracker: {teamA: datetime_of_last_shot}
-last_shot_time = {}
-COOLDOWN_MINUTES = 10
-
+# Shooting Functions
 def can_shoot(team):
     now = datetime.now(timezone.utc)
     last = last_shot_time.get(team)
@@ -227,19 +199,16 @@ def handle_tile_selection(selecting_team, target_coord, boards, team_channels):
     target_board = boards[opposing_team]
     target_coord = target_coord.upper()
      
-    # check cooldown
     can_shoot_result, cooldown_msg = can_shoot(selecting_team)
     if not can_shoot_result:
         return {"error": cooldown_msg}
 
-    # validate shot
     tile = target_board["tiles"].get(target_coord)
     if not tile:
         return {"error": f"❌ Invalid coordinate {target_coord}."}
     if already_shot(target_board, target_coord):
         return {"error": f"❌ Coordinate {target_coord} has already been targeted."}
     
-    # record shot
     is_hit = "ship" in tile
     timestamp = datetime.now(timezone.utc).isoformat()
 
@@ -251,12 +220,10 @@ def handle_tile_selection(selecting_team, target_coord, boards, team_channels):
     
     last_shot_time[selecting_team] = datetime.now(timezone.utc)
     
-    # save board state
     file_path = board_path(opposing_team)
     with open(file_path, "w") as f:
         json.dump(target_board, f, indent=2)
     
-    # prepare result messages with board previews
     team_selecting_channel = team_channels[selecting_team]
     team_target_channel = team_channels[opposing_team]
 
@@ -271,10 +238,7 @@ def handle_tile_selection(selecting_team, target_coord, boards, team_channels):
         result_to_team = f"💨 **Miss!** {target_coord} is just a *{tile_name}* (Difficulty: {difficulty}).\n> {desc}\n"
         result_to_opponent = f"⚠️ **{selecting_team}** fired at **{target_coord}**!\n🛡️ It was a **MISS**."
 
-    # add board previews:
-    # selecting team sees opponent board with hits/misses only (no ships)
     board_preview_for_selecting = render_board_with_shots(target_board, reveal_ships=False)
-    # opponent team sees their own board with ships and shots
     board_preview_for_opponent = render_board_with_shots(boards[opposing_team], reveal_ships=True)
 
     return {
@@ -284,13 +248,44 @@ def handle_tile_selection(selecting_team, target_coord, boards, team_channels):
         "opponent_channel": team_target_channel,
     }
 
+# Rendering Functions
+def render_board_preview(board, required_ships=None):
+    rows = "ABCDEFGHIJ"
+    emoji_numbers = ["1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣", "8️⃣", "9️⃣", "🔟"]
+    emoji_letters = ["🇦", "🇧", "🇨", "🇩", "🇪", "🇫", "🇬", "🇭", "🇮", "🇯"]
+
+    preview = "```\n🧭 " + " ".join(emoji_numbers[:10]) + "\n"
+    for i, r in enumerate(rows):
+        line = f"{emoji_letters[i]} "
+        for c in range(1, 11):
+            coord = f"{r}{c}"
+            tile = board["tiles"].get(coord, {})
+            if tile.get("ship"):
+                ship_type = tile["ship"]
+                emoji = SHIP_EMOJIS.get(ship_type, "❓")
+                line += emoji + " "
+            else:
+                line += WATER_EMOJI + " "
+        preview += line + "\n"
+    preview += "```"
+
+    if not board.get("locked", False) and required_ships:
+        placed_ships = set(board.get("ships", {}).keys())
+        remaining_ships = set(required_ships) - placed_ships
+        if remaining_ships:
+            preview += "\nRemaining ships to place: **" + ", ".join(remaining_ships) + "**"
+
+    return preview
 
 def render_board_with_shots(board, reveal_ships=False):
     rows = "ABCDEFGHIJ"
+    emoji_numbers = ["1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣", "8️⃣", "9️⃣", "🔟"]
+    emoji_letters = ["🇦", "🇧", "🇨", "🇩", "🇪", "🇫", "🇬", "🇭", "🇮", "🇯"]
     shots = board.get("shots", {})
-    preview = "```\n  " + " ".join(f"{i+1:2}" for i in range(10)) + "\n"
-    for r in rows:
-        line = f"{r} "
+
+    preview = "```\n🧭 " + " ".join(emoji_numbers[:10]) + "\n"
+    for i, r in enumerate(rows):
+        line = f"{emoji_letters[i]} "
         for c in range(1, 11):
             coord = f"{r}{c}"
             tile = board["tiles"].get(coord, {})
@@ -311,16 +306,14 @@ def render_board_with_shots(board, reveal_ships=False):
     preview += "```"
     return preview
 
+# Miscellaneous Functions
 def get_tile_details(board, coord):
     coord = coord.upper()
     tile = board["tiles"].get(coord)
     if not tile:
         return f"❌ No tile data found for {coord}."
 
-    # make a shallow copy excluding 'previous_tile'
     details = {k: v for k, v in tile.items() if k != "previous_tile"}
-
-    # format the details as a string TODO
     detail_lines = [f"{k.capitalize()}: {v}" for k, v in details.items()]
     return f"Details for {coord}:\n" + "\n".join(detail_lines)
 
@@ -337,29 +330,25 @@ async def current_task_command(team, boards, ctx):
         await ctx.send("You have not made any shots yet.")
         return
 
-    # get tile details from opponent's board at last_coord
     details_msg = get_tile_details(opponent_board, last_coord)
     await ctx.send(details_msg)
 
 def get_last_shot_coord(board):
     shots = board.get("shots", {})
     if not shots:
-        return None  # No shots yet
-    # shots is a dict coord -> shot info with timestamp keys
-    # sort shots by timestamp descending and return the coord of most recent shot
+        return None
     sorted_shots = sorted(
         shots.items(),
         key=lambda item: datetime.fromisoformat(item[1]["timestamp"]),
         reverse=True,
     )
-    return sorted_shots[0][0]  # coordinate of last shot
+    return sorted_shots[0][0]
 
 def get_shots_against_team(team):
     board = load_board(team)
     return board.get("shots", {})
 
 def get_move_history_for_team(team_name, boards):
-    # iterate all boards and collect moves made by team_name
     moves = []
     for opponent_team, board in boards.items():
         for coord, shot in board.get("shots", {}).items():
@@ -370,6 +359,5 @@ def get_move_history_for_team(team_name, boards):
                     "hit": shot["hit"],
                     "timestamp": shot["timestamp"]
                 })
-    # sort moves by timestamp ascending
     moves.sort(key=lambda x: x["timestamp"])
     return moves
