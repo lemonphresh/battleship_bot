@@ -333,7 +333,6 @@ async def battleship_commands(ctx):
     embed.add_field(name="!remove <ship>", value="Remove a ship from your board.", inline=False)
     embed.add_field(name="!lockboard [team]", value="Lock the board to prevent changes. Refs role required.", inline=False)
     embed.add_field(name="!unlockboard [team]", value="Unlock the board to allow changes. Refs role required.", inline=False)
-    embed.add_field(name="!board_status <team>", value="Show board status (shots, hits, misses). Refs role required.", inline=False)
     embed.add_field(name="!team_progress", value="Show overall progress of teams. Refs role required.", inline=False)
     embed.add_field(name="!current_task", value="Show your team's current task.", inline=False)
     embed.add_field(name="!select <coord>", value="Select a coordinate to shoot at. Example: `!select B5`", inline=False)

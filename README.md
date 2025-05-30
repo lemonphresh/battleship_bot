@@ -23,3 +23,16 @@ You're ready to go!
 4. Now, teams can start selecting where to strike on their opponent's board with `!select [coordinates]`. There will be a cooldown after selecting a tile to prevent people from griefing. This will post in both the selecting team's channel and the opposing team's channel to communicate whether there was a hit on a boat or a miss, and it will also explain what the tile entails.
 
 5. The teams will have to complete the tiles' tasks and post proof in their respective drops channels to carry on.
+
+### Commands
+
+- **!shiptypes**: Show ship types and sizes.
+- **!view_board**: View your team's current board.
+- **!team**: Show your team name.
+- **!place [ship] [h/v] [starting coord]**: Place a ship on your board. Example: `!place carrier h A,3`.
+- **!remove [ship]**: Remove a ship from your board.
+- **!lockboard [team]**: Lock the board to prevent changes. Requires the "Refs" role.
+- **!unlockboard [team]**: Unlock the board to allow changes. Requires the "Refs" role.
+- **!team_progress**: Show overall progress of teams. Requires the "Refs" role.
+- **!current_task**: Show your team's current task.
+- **!select [coord]**: Select a coordinate to shoot at. Example: `!select B,5`.
