@@ -1,9 +1,8 @@
 import json
-from datetime import datetime, timedelta
 from pathlib import Path
 import random
 import os
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 import config
 
@@ -211,7 +210,7 @@ last_shot_time = {}
 COOLDOWN_MINUTES = 10
 
 def can_shoot(team):
-    now = datetime.now(datetime.timezone.utc)
+    now = datetime.now(timezone.utc)
     last = last_shot_time.get(team)
     if last and now - last < timedelta(minutes=COOLDOWN_MINUTES):
         remaining = timedelta(minutes=COOLDOWN_MINUTES) - (now - last)
@@ -227,7 +226,12 @@ def handle_tile_selection(selecting_team, target_coord, boards, team_channels):
     opposing_team = config.TEAM_PAIRS.get(selecting_team)
     target_board = boards[opposing_team]
     target_coord = target_coord.upper()
-    
+     
+    # check cooldown
+    can_shoot_result, cooldown_msg = can_shoot(selecting_team)
+    if not can_shoot_result:
+        return {"error": cooldown_msg}
+
     # validate shot
     tile = target_board["tiles"].get(target_coord)
     if not tile:
@@ -237,14 +241,15 @@ def handle_tile_selection(selecting_team, target_coord, boards, team_channels):
     
     # record shot
     is_hit = "ship" in tile
-    timestamp = datetime.now(datetime.timezone.utc).isoformat()
+    timestamp = datetime.now(timezone.utc).isoformat()
+
     target_board.setdefault("shots", {})[target_coord] = {
         "by": selecting_team,
         "hit": is_hit,
         "timestamp": timestamp,
     }
     
-    last_shot_time[selecting_team] = datetime.now(datetime.timezone.utc)
+    last_shot_time[selecting_team] = datetime.now(timezone.utc)
     
     # save board state
     file_path = board_path(opposing_team)

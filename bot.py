@@ -3,8 +3,7 @@ import config
 import os
 import json
 from discord.ext import commands
-from utils.game import generate_board,handle_tile_selection, current_task_command, render_board_preview, board_path, place_ship_to_file, remove_ship_from_file, load_board, render_board_with_shots
-from datetime import datetime, timedelta
+from utils.game import generate_board, handle_tile_selection, current_task_command, render_board_preview, board_path, place_ship_to_file, remove_ship_from_file, load_board, render_board_with_shots
 
 required_ships = ["carrier", "battleship", "cruiser", "submarine", "destroyer"]
 
@@ -46,8 +45,6 @@ def is_valid_coordinate(coord):
     col = coord[0].upper()
     row = coord[1:]
     return col in "ABCDEFGHIJ" and row.isdigit() and 1 <= int(row) <= 10
-
-# --- LOCK / UNLOCK BOARD IMPLEMENTATION ---
 
 def lock_board(board, required_ships):
     if board.get("locked", False):
