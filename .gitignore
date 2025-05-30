@@ -1,0 +1,6 @@
+.env
+__pycache__/
+
+# hides the board files from the file explorer
+data/*
+!data/example*

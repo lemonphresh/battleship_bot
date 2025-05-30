@@ -1,0 +1,614 @@
+{
+  "tiles": {
+    "A1": {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    "A2": {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    "A3": {
+      "difficulty": "hard",
+      "name": "Carrier Tile 1",
+      "description": "This is a tile of the carrier ship.",
+      "ship": "carrier",
+      "previous_tile": {
+        "difficulty": "hard",
+        "name": "God Wars Dungeon",
+        "description": "description"
+      }
+    },
+    "A4": {
+      "difficulty": "easy",
+      "name": "Training Dummy",
+      "description": "description"
+    },
+    "A5": {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    "A6": {
+      "difficulty": "easy",
+      "name": "Fishing Spot",
+      "description": "description"
+    },
+    "A7": {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    "A8": {
+      "difficulty": "medium",
+      "name": "Chaos Altar",
+      "description": "description"
+    },
+    "A9": {
+      "difficulty": "easy",
+      "name": "Fishing Spot",
+      "description": "description"
+    },
+    "A10": {
+      "difficulty": "easy",
+      "name": "Submarine Tile 1",
+      "description": "This is a tile of the submarine.",
+      "ship": "submarine",
+      "previous_tile": {
+        "difficulty": "easy",
+        "name": "Training Dummy",
+        "description": "description"
+      }
+    },
+    "B1": {
+      "difficulty": "medium",
+      "name": "Battleship Tile 1",
+      "description": "This is a tile of the battleship.",
+      "ship": "battleship",
+      "previous_tile": {
+        "difficulty": "hard",
+        "name": "God Wars Dungeon",
+        "description": "description"
+      }
+    },
+    "B2": {
+      "difficulty": "easy",
+      "name": "Training Dummy",
+      "description": "description"
+    },
+    "B3": {
+      "difficulty": "hard",
+      "name": "Carrier Tile 2",
+      "description": "This is a tile of the carrier ship.",
+      "ship": "carrier",
+      "previous_tile": {
+        "difficulty": "hard",
+        "name": "God Wars Dungeon",
+        "description": "description"
+      }
+    },
+    "B4": {
+      "difficulty": "easy",
+      "name": "Training Dummy",
+      "description": "description"
+    },
+    "B5": {
+      "difficulty": "easy",
+      "name": "Training Dummy",
+      "description": "description"
+    },
+    "B6": {
+      "difficulty": "easy",
+      "name": "Fishing Spot",
+      "description": "description"
+    },
+    "B7": {
+      "difficulty": "easy",
+      "name": "Training Dummy",
+      "description": "description"
+    },
+    "B8": {
+      "difficulty": "medium",
+      "name": "Chaos Altar",
+      "description": "description"
+    },
+    "B9": {
+      "difficulty": "easy",
+      "name": "Fishing Spot",
+      "description": "description"
+    },
+    "B10": {
+      "difficulty": "easy",
+      "name": "Submarine Tile 2",
+      "description": "This is a tile of the submarine.",
+      "ship": "submarine",
+      "previous_tile": {
+        "difficulty": "easy",
+        "name": "Fishing Spot",
+        "description": "description"
+      }
+    },
+    "C1": {
+      "difficulty": "medium",
+      "name": "Battleship Tile 2",
+      "description": "This is a tile of the battleship.",
+      "ship": "battleship",
+      "previous_tile": {
+        "difficulty": "medium",
+        "name": "Chaos Altar",
+        "description": "description"
+      }
+    },
+    "C2": {
+      "difficulty": "easy",
+      "name": "Training Dummy",
+      "description": "description"
+    },
+    "C3": {
+      "difficulty": "hard",
+      "name": "Carrier Tile 3",
+      "description": "This is a tile of the carrier ship.",
+      "ship": "carrier",
+      "previous_tile": {
+        "difficulty": "easy",
+        "name": "Training Dummy",
+        "description": "description"
+      }
+    },
+    "C4": {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    "C5": {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    "C6": {
+      "difficulty": "medium",
+      "name": "Chaos Altar",
+      "description": "description"
+    },
+    "C7": {
+      "difficulty": "easy",
+      "name": "Fishing Spot",
+      "description": "description"
+    },
+    "C8": {
+      "difficulty": "medium",
+      "name": "Chaos Altar",
+      "description": "description"
+    },
+    "C9": {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    "C10": {
+      "difficulty": "easy",
+      "name": "Submarine Tile 3",
+      "description": "This is a tile of the submarine.",
+      "ship": "submarine",
+      "previous_tile": {
+        "difficulty": "hard",
+        "name": "God Wars Dungeon",
+        "description": "description"
+      }
+    },
+    "D1": {
+      "difficulty": "medium",
+      "name": "Battleship Tile 3",
+      "description": "This is a tile of the battleship.",
+      "ship": "battleship",
+      "previous_tile": {
+        "difficulty": "easy",
+        "name": "Training Dummy",
+        "description": "description"
+      }
+    },
+    "D2": {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    "D3": {
+      "difficulty": "hard",
+      "name": "Carrier Tile 4",
+      "description": "This is a tile of the carrier ship.",
+      "ship": "carrier",
+      "previous_tile": {
+        "difficulty": "hard",
+        "name": "God Wars Dungeon",
+        "description": "description"
+      }
+    },
+    "D4": {
+      "difficulty": "easy",
+      "name": "Fishing Spot",
+      "description": "description"
+    },
+    "D5": {
+      "difficulty": "easy",
+      "name": "Fishing Spot",
+      "description": "description"
+    },
+    "D6": {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    "D7": {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    "D8": {
+      "difficulty": "easy",
+      "name": "Training Dummy",
+      "description": "description"
+    },
+    "D9": {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    "D10": {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    "E1": {
+      "difficulty": "medium",
+      "name": "Battleship Tile 4",
+      "description": "This is a tile of the battleship.",
+      "ship": "battleship",
+      "previous_tile": {
+        "difficulty": "easy",
+        "name": "Fishing Spot",
+        "description": "description"
+      }
+    },
+    "E2": {
+      "difficulty": "easy",
+      "name": "Fishing Spot",
+      "description": "description"
+    },
+    "E3": {
+      "difficulty": "hard",
+      "name": "Carrier Tile 5",
+      "description": "This is a tile of the carrier ship.",
+      "ship": "carrier",
+      "previous_tile": {
+        "difficulty": "hard",
+        "name": "God Wars Dungeon",
+        "description": "description"
+      }
+    },
+    "E4": {
+      "difficulty": "easy",
+      "name": "Training Dummy",
+      "description": "description"
+    },
+    "E5": {
+      "difficulty": "medium",
+      "name": "Chaos Altar",
+      "description": "description"
+    },
+    "E6": {
+      "difficulty": "medium",
+      "name": "Chaos Altar",
+      "description": "description"
+    },
+    "E7": {
+      "difficulty": "easy",
+      "name": "Training Dummy",
+      "description": "description"
+    },
+    "E8": {
+      "difficulty": "easy",
+      "name": "Fishing Spot",
+      "description": "description"
+    },
+    "E9": {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    "E10": {
+      "difficulty": "medium",
+      "name": "Chaos Altar",
+      "description": "description"
+    },
+    "F1": {
+      "difficulty": "easy",
+      "name": "Fishing Spot",
+      "description": "description"
+    },
+    "F2": {
+      "difficulty": "easy",
+      "name": "Training Dummy",
+      "description": "description"
+    },
+    "F3": {
+      "difficulty": "medium",
+      "name": "Chaos Altar",
+      "description": "description"
+    },
+    "F4": {
+      "difficulty": "medium",
+      "name": "Chaos Altar",
+      "description": "description"
+    },
+    "F5": {
+      "difficulty": "medium",
+      "name": "Chaos Altar",
+      "description": "description"
+    },
+    "F6": {
+      "difficulty": "easy",
+      "name": "Training Dummy",
+      "description": "description"
+    },
+    "F7": {
+      "difficulty": "easy",
+      "name": "Destroyer Tile 1",
+      "description": "This is a tile of the destroyer.",
+      "ship": "destroyer",
+      "previous_tile": {
+        "difficulty": "hard",
+        "name": "God Wars Dungeon",
+        "description": "description"
+      }
+    },
+    "F8": {
+      "difficulty": "medium",
+      "name": "Chaos Altar",
+      "description": "description"
+    },
+    "F9": {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    "F10": {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    "G1": {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    "G2": {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    "G3": {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    "G4": {
+      "difficulty": "easy",
+      "name": "Training Dummy",
+      "description": "description"
+    },
+    "G5": {
+      "difficulty": "easy",
+      "name": "Fishing Spot",
+      "description": "description"
+    },
+    "G6": {
+      "difficulty": "easy",
+      "name": "Fishing Spot",
+      "description": "description"
+    },
+    "G7": {
+      "difficulty": "easy",
+      "name": "Destroyer Tile 2",
+      "description": "This is a tile of the destroyer.",
+      "ship": "destroyer",
+      "previous_tile": {
+        "difficulty": "easy",
+        "name": "Fishing Spot",
+        "description": "description"
+      }
+    },
+    "G8": {
+      "difficulty": "easy",
+      "name": "Training Dummy",
+      "description": "description"
+    },
+    "G9": {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    "G10": {
+      "difficulty": "medium",
+      "name": "Chaos Altar",
+      "description": "description"
+    },
+    "H1": {
+      "difficulty": "easy",
+      "name": "Fishing Spot",
+      "description": "description"
+    },
+    "H2": {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    "H3": {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    "H4": {
+      "difficulty": "easy",
+      "name": "Training Dummy",
+      "description": "description"
+    },
+    "H5": {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    "H6": {
+      "difficulty": "medium",
+      "name": "Cruiser Tile 1",
+      "description": "This is a tile of the cruiser.",
+      "ship": "cruiser",
+      "previous_tile": {
+        "difficulty": "medium",
+        "name": "Chaos Altar",
+        "description": "description"
+      }
+    },
+    "H7": {
+      "difficulty": "medium",
+      "name": "Cruiser Tile 2",
+      "description": "This is a tile of the cruiser.",
+      "ship": "cruiser",
+      "previous_tile": {
+        "difficulty": "hard",
+        "name": "God Wars Dungeon",
+        "description": "description"
+      }
+    },
+    "H8": {
+      "difficulty": "medium",
+      "name": "Cruiser Tile 3",
+      "description": "This is a tile of the cruiser.",
+      "ship": "cruiser",
+      "previous_tile": {
+        "difficulty": "hard",
+        "name": "God Wars Dungeon",
+        "description": "description"
+      }
+    },
+    "H9": {
+      "difficulty": "easy",
+      "name": "Fishing Spot",
+      "description": "description"
+    },
+    "H10": {
+      "difficulty": "medium",
+      "name": "Chaos Altar",
+      "description": "description"
+    },
+    "I1": {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    "I2": {
+      "difficulty": "medium",
+      "name": "Chaos Altar",
+      "description": "description"
+    },
+    "I3": {
+      "difficulty": "medium",
+      "name": "Chaos Altar",
+      "description": "description"
+    },
+    "I4": {
+      "difficulty": "easy",
+      "name": "Training Dummy",
+      "description": "description"
+    },
+    "I5": {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    "I6": {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    "I7": {
+      "difficulty": "easy",
+      "name": "Training Dummy",
+      "description": "description"
+    },
+    "I8": {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    "I9": {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    "I10": {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    "J1": {
+      "difficulty": "medium",
+      "name": "Chaos Altar",
+      "description": "description"
+    },
+    "J2": {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    "J3": {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    "J4": {
+      "difficulty": "easy",
+      "name": "Training Dummy",
+      "description": "description"
+    },
+    "J5": {
+      "difficulty": "medium",
+      "name": "Chaos Altar",
+      "description": "description"
+    },
+    "J6": {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    "J7": {
+      "difficulty": "easy",
+      "name": "Fishing Spot",
+      "description": "description"
+    },
+    "J8": {
+      "difficulty": "medium",
+      "name": "Chaos Altar",
+      "description": "description"
+    },
+    "J9": {
+      "difficulty": "easy",
+      "name": "Fishing Spot",
+      "description": "description"
+    },
+    "J10": {
+      "difficulty": "easy",
+      "name": "Fishing Spot",
+      "description": "description"
+    }
+  },
+  "ships": {
+    "battleship": ["B1", "C1", "D1", "E1"],
+    "cruiser": ["H6", "H7", "H8"],
+    "destroyer": ["F7", "G7"],
+    "submarine": ["A10", "B10", "C10"],
+    "carrier": ["A3", "B3", "C3", "D3", "E3"]
+  },
+  "locked": true
+}

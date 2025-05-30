@@ -1,0 +1,504 @@
+{
+  "tiles": [
+    {
+      "difficulty": "easy",
+      "name": "Fishing Spot",
+      "description": "description"
+    },
+    {
+      "difficulty": "easy",
+      "name": "Training Dummy",
+      "description": "description"
+    },
+    {
+      "difficulty": "medium",
+      "name": "Chaos Altar",
+      "description": "description"
+    },
+    {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    {
+      "difficulty": "easy",
+      "name": "Fishing Spot",
+      "description": "description"
+    },
+    {
+      "difficulty": "easy",
+      "name": "Training Dummy",
+      "description": "description"
+    },
+    {
+      "difficulty": "medium",
+      "name": "Chaos Altar",
+      "description": "description"
+    },
+    {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    {
+      "difficulty": "easy",
+      "name": "Fishing Spot",
+      "description": "description"
+    },
+    {
+      "difficulty": "easy",
+      "name": "Training Dummy",
+      "description": "description"
+    },
+    {
+      "difficulty": "medium",
+      "name": "Chaos Altar",
+      "description": "description"
+    },
+    {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    {
+      "difficulty": "easy",
+      "name": "Fishing Spot",
+      "description": "description"
+    },
+    {
+      "difficulty": "easy",
+      "name": "Training Dummy",
+      "description": "description"
+    },
+    {
+      "difficulty": "medium",
+      "name": "Chaos Altar",
+      "description": "description"
+    },
+    {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    {
+      "difficulty": "easy",
+      "name": "Fishing Spot",
+      "description": "description"
+    },
+    {
+      "difficulty": "easy",
+      "name": "Training Dummy",
+      "description": "description"
+    },
+    {
+      "difficulty": "medium",
+      "name": "Chaos Altar",
+      "description": "description"
+    },
+    {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    {
+      "difficulty": "easy",
+      "name": "Fishing Spot",
+      "description": "description"
+    },
+    {
+      "difficulty": "easy",
+      "name": "Training Dummy",
+      "description": "description"
+    },
+    {
+      "difficulty": "medium",
+      "name": "Chaos Altar",
+      "description": "description"
+    },
+    {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    {
+      "difficulty": "easy",
+      "name": "Fishing Spot",
+      "description": "description"
+    },
+    {
+      "difficulty": "easy",
+      "name": "Training Dummy",
+      "description": "description"
+    },
+    {
+      "difficulty": "medium",
+      "name": "Chaos Altar",
+      "description": "description"
+    },
+    {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    {
+      "difficulty": "easy",
+      "name": "Fishing Spot",
+      "description": "description"
+    },
+    {
+      "difficulty": "easy",
+      "name": "Training Dummy",
+      "description": "description"
+    },
+    {
+      "difficulty": "medium",
+      "name": "Chaos Altar",
+      "description": "description"
+    },
+    {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    {
+      "difficulty": "easy",
+      "name": "Fishing Spot",
+      "description": "description"
+    },
+    {
+      "difficulty": "easy",
+      "name": "Training Dummy",
+      "description": "description"
+    },
+    {
+      "difficulty": "medium",
+      "name": "Chaos Altar",
+      "description": "description"
+    },
+    {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    {
+      "difficulty": "easy",
+      "name": "Fishing Spot",
+      "description": "description"
+    },
+    {
+      "difficulty": "easy",
+      "name": "Training Dummy",
+      "description": "description"
+    },
+    {
+      "difficulty": "medium",
+      "name": "Chaos Altar",
+      "description": "description"
+    },
+    {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    {
+      "difficulty": "easy",
+      "name": "Fishing Spot",
+      "description": "description"
+    },
+    {
+      "difficulty": "easy",
+      "name": "Training Dummy",
+      "description": "description"
+    },
+    {
+      "difficulty": "medium",
+      "name": "Chaos Altar",
+      "description": "description"
+    },
+    {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    {
+      "difficulty": "easy",
+      "name": "Fishing Spot",
+      "description": "description"
+    },
+    {
+      "difficulty": "easy",
+      "name": "Training Dummy",
+      "description": "description"
+    },
+    {
+      "difficulty": "medium",
+      "name": "Chaos Altar",
+      "description": "description"
+    },
+    {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    {
+      "difficulty": "easy",
+      "name": "Fishing Spot",
+      "description": "description"
+    },
+    {
+      "difficulty": "easy",
+      "name": "Training Dummy",
+      "description": "description"
+    },
+    {
+      "difficulty": "medium",
+      "name": "Chaos Altar",
+      "description": "description"
+    },
+    {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    {
+      "difficulty": "easy",
+      "name": "Fishing Spot",
+      "description": "description"
+    },
+    {
+      "difficulty": "easy",
+      "name": "Training Dummy",
+      "description": "description"
+    },
+    {
+      "difficulty": "medium",
+      "name": "Chaos Altar",
+      "description": "description"
+    },
+    {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    {
+      "difficulty": "easy",
+      "name": "Fishing Spot",
+      "description": "description"
+    },
+    {
+      "difficulty": "easy",
+      "name": "Training Dummy",
+      "description": "description"
+    },
+    {
+      "difficulty": "medium",
+      "name": "Chaos Altar",
+      "description": "description"
+    },
+    {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    {
+      "difficulty": "easy",
+      "name": "Fishing Spot",
+      "description": "description"
+    },
+    {
+      "difficulty": "easy",
+      "name": "Training Dummy",
+      "description": "description"
+    },
+    {
+      "difficulty": "medium",
+      "name": "Chaos Altar",
+      "description": "description"
+    },
+    {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    {
+      "difficulty": "easy",
+      "name": "Fishing Spot",
+      "description": "description"
+    },
+    {
+      "difficulty": "easy",
+      "name": "Training Dummy",
+      "description": "description"
+    },
+    {
+      "difficulty": "medium",
+      "name": "Chaos Altar",
+      "description": "description"
+    },
+    {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    {
+      "difficulty": "easy",
+      "name": "Fishing Spot",
+      "description": "description"
+    },
+    {
+      "difficulty": "easy",
+      "name": "Training Dummy",
+      "description": "description"
+    },
+    {
+      "difficulty": "medium",
+      "name": "Chaos Altar",
+      "description": "description"
+    },
+    {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    {
+      "difficulty": "easy",
+      "name": "Fishing Spot",
+      "description": "description"
+    },
+    {
+      "difficulty": "easy",
+      "name": "Training Dummy",
+      "description": "description"
+    },
+    {
+      "difficulty": "medium",
+      "name": "Chaos Altar",
+      "description": "description"
+    },
+    {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    {
+      "difficulty": "easy",
+      "name": "Fishing Spot",
+      "description": "description"
+    },
+    {
+      "difficulty": "easy",
+      "name": "Training Dummy",
+      "description": "description"
+    },
+    {
+      "difficulty": "medium",
+      "name": "Chaos Altar",
+      "description": "description"
+    },
+    {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    },
+    {
+      "difficulty": "hard",
+      "name": "God Wars Dungeon",
+      "description": "description"
+    }
+  ]
+}
