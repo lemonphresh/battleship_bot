@@ -2,10 +2,11 @@ import discord
 import config
 import os
 import json
+from datetime import datetime, timedelta, timezone
 from discord.ext import commands
 from utils.game import (
-    generate_board, handle_tile_selection, current_task_command, render_board_preview,
-    board_path, place_ship_to_file, remove_ship_from_file, load_board, render_board_with_shots
+    apply_event_to_board, generate_board, handle_tile_selection, current_task_command, render_board_preview,
+    board_path, place_ship_to_file, remove_ship_from_file, load_board, render_board_with_shots, resolve_event_on_board
 )
 
 required_ships = ["carrier", "battleship", "cruiser", "submarine", "destroyer"]
@@ -117,6 +118,24 @@ async def preview_board(ctx):
     if not board.get("locked", False):
         await ctx.send("Please place your ships.")
     
+    await ctx.send(preview)
+
+@bot.command(name="view_enemy_board")
+async def view_enemy_board(ctx):
+    team = get_team_from_channel(ctx.channel.id)
+    if not team:
+        await ctx.send("Could not detect your team.")
+        return
+
+    opponent = config.TEAM_PAIRS.get(team)
+    if not opponent:
+        await ctx.send("No opponent defined for your team.")
+        return
+
+    board = load_or_generate_board(opponent)
+    preview = render_board_with_shots(board, reveal_ships=False)
+
+    await ctx.send(f"⚓ Behold the enemy waters of **{opponent.upper()}**! Prepare to chart your course and strike true!")
     await ctx.send(preview)
 
 @bot.command()
@@ -348,10 +367,12 @@ async def intro(ctx):
 
     command_guide = (
         "## **🛠️ Team Commands:**\n\n"
-        "`!place [shiptype] [v/h] A,5` – Place a ship tile on your board, v for vertically and h for horizontally\n"
+        "`!place [shiptype] [v/h] A,5` – Place a ship tile on your board, v for vertically and h for horizontally. Ships are placed left to right, or top to bottom.\n"
         "`!remove [shiptype]` – Remove a ship tile from your board\n"
         "`!view_board` – See your current board\n"
+        "`!view_enemy_board` – See your enemy's board (without ships, of course!) \n"
         "`!shiptypes` – View ship types and their emoji markers\n"
+        "`!battleship_commands` – View all battleship commands\n"
         "⚓ ⚓ ⚓"
     )
 
@@ -411,6 +432,8 @@ async def begin_battle(ctx):
         "`!select [A1-J10]` – Fire upon an enemy tile\n"
         "`!current_task` – View your current task, if you've hit a tile\n"
         "`!view_board` – See your current board\n"
+        "`!view_enemy_board` – See your enemy's board (without ships, of course!) \n"
+        "`!battleship_commands` – View all battleship commands\n"
         "⚓ ⚓ ⚓"
     )
 
@@ -429,16 +452,104 @@ async def battleship_commands(ctx):
     
     embed.add_field(name="!shiptypes", value="Show ship types and sizes.", inline=False)
     embed.add_field(name="!view_board", value="View your team's current board.", inline=False)
+    embed.add_field(name="!view_enemy_board", value="View your enemy's current board (without ships, of course!).", inline=False)
     embed.add_field(name="!team", value="Show your team name.", inline=False)
     embed.add_field(name="!place <ship> <h/v> <start>", value="Place a ship on your board. Example: `!place carrier h A3`", inline=False)
     embed.add_field(name="!remove <ship>", value="Remove a ship from your board.", inline=False)
-    embed.add_field(name="!lockboard [team]", value="Lock the board to prevent changes. Refs role required.", inline=False)
-    embed.add_field(name="!unlockboard [team]", value="Unlock the board to allow changes. Refs role required.", inline=False)
-    embed.add_field(name="!team_progress", value="Show overall progress of teams. Refs role required.", inline=False)
     embed.add_field(name="!current_task", value="Show your team's current task.", inline=False)
     embed.add_field(name="!select <coord>", value="Select a coordinate to shoot at. Example: `!select B5`", inline=False)
     
     await ctx.send(embed=embed)
+
+@bot.command(name="refs_battleship_commands")
+async def refs_battleship_commands(ctx):
+    if not user_has_refs_role(ctx):
+        await ctx.send("❌ You need the `refs` role to use this command.")
+        return
+
+    embed = discord.Embed(title="Refs-Only Battleship Commands", color=0xe74c3c)
+    
+    embed.add_field(name="!lockboard [team]", value="Lock a team's board to prevent further changes.", inline=False)
+    embed.add_field(name="!unlockboard [team]", value="Unlock a team's board to allow changes.", inline=False)
+    embed.add_field(name="!board_status <team>", value="View the status of a team's board.", inline=False)
+    embed.add_field(name="!team_progress", value="View progress of all teams.", inline=False)
+    embed.add_field(name="!intro", value="Send the introductory message to all team channels.", inline=False)
+    embed.add_field(name="!beginbattle", value="Once boards are locked, start the battle and send the battle instructions.", inline=False)
+    embed.add_field(name="!eventstart <event_type>", value="Start a random event for all teams.", inline=False)
+    embed.add_field(name="!eventend <event_type> <complete|fail>", value="End a random event for the current team.", inline=False)
+
+    await ctx.send(embed=embed)
+
+# Random Event Handlers 
+@bot.command(name="eventstart")
+async def start_event(ctx, event_type: str):
+    if not user_has_refs_role(ctx):
+        await ctx.send("❌ You need the `refs` role to use this command.")
+        return
+
+    try:
+        with open("data/random_events.json") as f:
+            events_data = json.load(f)
+    except Exception as e:
+        await ctx.send("⚠️ Could not load event definitions.")
+        return
+
+    if event_type not in events_data:
+        await ctx.send(f"❌ Unknown event: `{event_type}`.")
+        return
+
+    now = datetime.now(timezone.utc)
+    deadline = now + timedelta(hours=events_data[event_type]["duration_hours"])
+    unix_timestamp = int(deadline.timestamp()) 
+
+    for team, channel_id in config.TEAM_CHANNELS.items():
+        coord, err = apply_event_to_board(event_type, team, events_data)
+        channel = bot.get_channel(int(channel_id))
+        if err:
+            await channel.send(f"⚠️ `{event_type.title()}` tried to strike, but no valid targets on your board!")
+            continue
+
+        await channel.send(
+            f"## 🌊 **A strange disturbance stirs the seas...** 🌊\n\n"
+            f"⚠️ All hands on deck! A new threat has surfaced: **{event_type.upper()}** {events_data[event_type]['emoji']}\n"
+            f"Something is happening at **{coord}**!\n"
+            f"{events_data[event_type]['details']}\n\n"
+            f"⏳ You must complete your task <t:{unix_timestamp}:R>, or the sea shall claim that tile!"
+        )
+
+    await ctx.send(f"📣 `{event_type}` event has been launched across all teams.")
+
+@bot.command(name="eventend")
+async def end_event(ctx, event_type: str, result: str):
+    if not user_has_refs_role(ctx):
+        await ctx.send("❌ You need the `refs` role to use this command.")
+        return
+
+    if result not in ["complete", "fail"]:
+        await ctx.send("⚠️ Usage: `!eventend kraken complete|fail`")
+        return
+
+    team = get_team_from_channel(ctx.channel.id)
+    if not team:
+        await ctx.send("⚠️ Could not determine team from this channel.")
+        return
+
+    success = resolve_event_on_board(event_type, team, result)
+    if not success:
+        await ctx.send(f"⚠️ No active `{event_type}` event found to resolve for `{team}`.")
+        return
+
+    if result == "complete":
+        await ctx.send(
+            f"✅ **{event_type.title()} Event Complete!**\n\n"
+            f"Your crew faced the tide and triumphed. The menace has been repelled — your ship remains afloat! ⛵"
+        )
+    else:
+        await ctx.send(
+            f"💀 **{event_type.title()} Event Failed...**\n\n"
+            f"A dark fate befalls your fleet. The ocean has claimed its toll... a ship tile is lost to the deep. ⚓"
+        )
+    print(f"{event_type} event resolved for {team}: {result}")
 
 # Event Handlers
 @bot.event

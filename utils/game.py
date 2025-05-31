@@ -188,7 +188,7 @@ def can_shoot(team):
         remaining = timedelta(minutes=COOLDOWN_MINUTES) - (now - last)
         mins = remaining.seconds // 60
         secs = remaining.seconds % 60
-        return False, f"⏳ Cooldown active. Wait {mins}m {secs}s before next shot."
+        return False, f"🚢 Hold position! You must complete your task before unleashing another volley."
     return True, None
 
 def already_shot(board, coord):
@@ -205,10 +205,15 @@ def handle_tile_selection(selecting_team, target_coord, boards, team_channels):
 
     tile = target_board["tiles"].get(target_coord)
     if not tile:
-        return {"error": f"❌ Invalid coordinate {target_coord}."}
+        return {
+            "error": f"❌ **{target_coord}** is impossible to hit — there's nothing there to strike, Captain! Check the map and strike between A1 and J10."
+        }
+
     if already_shot(target_board, target_coord):
-        return {"error": f"❌ Coordinate {target_coord} has already been targeted."}
-    
+        return {
+            "error": f"⚠️ **{target_coord}** has already felt the cannon's wrath! Choose a new target, sailor."
+        }
+
     is_hit = "ship" in tile
     timestamp = datetime.now(timezone.utc).isoformat()
 
@@ -227,23 +232,47 @@ def handle_tile_selection(selecting_team, target_coord, boards, team_channels):
     team_selecting_channel = team_channels[selecting_team]
     team_target_channel = team_channels[opposing_team]
 
+    print(tile)
     if is_hit:
         ship_name = tile["ship"].capitalize()
-        result_to_team = f"🎯 **HIT!** You struck the enemy’s **{ship_name}** at {target_coord}!\n"
-        result_to_opponent = f"⚠️ **{selecting_team}** fired at **{target_coord}**!\n🚨 It was a **HIT** on the {ship_name}!"
+        tile_name = tile["name"]
+        tile_details = tile["details"]
+        tile_count = tile.get("count", 0)
+
+        result_to_team = (
+            f"💥 **Direct hit, Captain!** The enemy’s **{ship_name}** took a blow at **{target_coord}**!\n"
+            f"The sea trembles with your precision. ⚓"
+            f"\n\n You must vanquish **{tile_count}** **{tile_name}** to successfully damage their {ship_name}!"
+        )
+        if tile_details:
+            result_to_team += f"\n\n📜 **Additional Details:**\n\n{tile_details}"
+        result_to_opponent = (
+            f"🚨 **Incoming fire from {selecting_team.upper()}!**\n"
+            f"📍 Impact at **{target_coord}** — your **{ship_name}** has been struck!\n"
+            f"The hull shudders under the blast... ⚠️"
+        )
     else:
         tile_name = tile.get("name", "Water")
-        difficulty = tile.get("difficulty", "unknown").capitalize()
-        desc = tile.get("description", "")
-        result_to_team = f"💨 **Miss!** {target_coord} is just a *{tile_name}* (Difficulty: {difficulty}).\n> {desc}\n"
-        result_to_opponent = f"⚠️ **{selecting_team}** fired at **{target_coord}**!\n🛡️ It was a **MISS**."
+        tile_details = tile.get("details", "")
+        tile_count = tile.get("count", 0)
+        result_to_team = (
+            f"💨 **Splashdown!** Your shot landed at **{target_coord}**, but struck only the water... "
+            f"No sign of enemy steel... just the ocean’s secrets. 🌊"
+            f"\n\n You must vanquish **{tile_count}** **{tile_name}** in order to be able to take another shot."
+        )
+        if tile_details:
+            result_to_team += f"\n\n📜 **Additional Details:**\n\n{tile_details}"
+        result_to_opponent = (
+            f"🛡️ **{selecting_team.upper()}** opened fire at **{target_coord}**...\n"
+            f"💦 The cannonball vanished beneath the waves — a clean **MISS**."
+        )
 
     board_preview_for_selecting = render_board_with_shots(target_board, reveal_ships=False)
     board_preview_for_opponent = render_board_with_shots(boards[opposing_team], reveal_ships=True)
 
     return {
-        "team_msg": result_to_team + "\n\n Here's their board now. \n\n" + board_preview_for_selecting,
-        "opponent_msg": result_to_opponent + "\n\n Here's your board now. \n\n" + board_preview_for_opponent,
+        "team_msg": result_to_team + "\n\n 🏴‍☠️ Avast, this is what we see through the spyglass... their waters await: \n\n" + board_preview_for_selecting,
+        "opponent_msg": result_to_opponent + "\n\n 🧭 Your waters, crew — here’s how they look: \n\n" + board_preview_for_opponent,
         "team_channel": team_selecting_channel,
         "opponent_channel": team_target_channel,
     }
@@ -254,20 +283,23 @@ def render_board_preview(board, required_ships=None):
     emoji_numbers = ["1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣", "8️⃣", "9️⃣", "🔟"]
     emoji_letters = ["🇦", "🇧", "🇨", "🇩", "🇪", "🇫", "🇬", "🇭", "🇮", "🇯"]
 
-    preview = "```\n🧭 " + " ".join(emoji_numbers[:10]) + "\n"
+    preview = "\n🧭 " + " ".join(emoji_numbers[:10]) + "\n"
     for i, r in enumerate(rows):
         line = f"{emoji_letters[i]} "
         for c in range(1, 11):
             coord = f"{r}{c}"
             tile = board["tiles"].get(coord, {})
-            if tile.get("ship"):
+            if tile.get("name") == "Wreckage":
+                line += "💥 " 
+            elif tile.get("event") == "kraken":
+                line += "🐙 "  
+            elif tile.get("ship"):
                 ship_type = tile["ship"]
                 emoji = SHIP_EMOJIS.get(ship_type, "❓")
                 line += emoji + " "
             else:
                 line += WATER_EMOJI + " "
         preview += line + "\n"
-    preview += "```"
 
     if not board.get("locked", False) and required_ships:
         placed_ships = set(board.get("ships", {}).keys())
@@ -283,7 +315,7 @@ def render_board_with_shots(board, reveal_ships=False):
     emoji_letters = ["🇦", "🇧", "🇨", "🇩", "🇪", "🇫", "🇬", "🇭", "🇮", "🇯"]
     shots = board.get("shots", {})
 
-    preview = "```\n🧭 " + " ".join(emoji_numbers[:10]) + "\n"
+    preview = "\n🧭 " + " ".join(emoji_numbers[:10]) + "\n"
     for i, r in enumerate(rows):
         line = f"{emoji_letters[i]} "
         for c in range(1, 11):
@@ -297,13 +329,16 @@ def render_board_with_shots(board, reveal_ships=False):
                 else:
                     line += "⚫ "  # miss marker
             else:
-                if reveal_ships and tile.get("ship"):
+                if tile.get("name") == "Wreckage":
+                    line += "💥 " 
+                elif tile.get("event") == "kraken":
+                    line += "🐙 "  
+                elif reveal_ships and tile.get("ship"):
                     emoji = SHIP_EMOJIS.get(tile["ship"], "❓")
                     line += emoji + " "
                 else:
                     line += WATER_EMOJI + " "
         preview += line + "\n"
-    preview += "```"
     return preview
 
 # Miscellaneous Functions
@@ -327,7 +362,7 @@ async def current_task_command(team, boards, ctx):
 
     last_coord = get_last_shot_coord(opponent_board)
     if not last_coord:
-        await ctx.send("You have not made any shots yet.")
+        await ctx.send("Yer cannons be silent — no shots fired yet, captain!")
         return
 
     details_msg = get_tile_details(opponent_board, last_coord)
@@ -361,3 +396,55 @@ def get_move_history_for_team(team_name, boards):
                 })
     moves.sort(key=lambda x: x["timestamp"])
     return moves
+
+## Event Functions
+def apply_event_to_board(event_type, team, events_data):
+    board = load_board(team)
+    ship_tiles = [coord for coord, tile in board["tiles"].items() if "ship" in tile and not tile.get("event")]
+
+    if not ship_tiles:
+        return None, "No available ship tiles to target."
+
+    target_coord = random.choice(ship_tiles)
+    original = board["tiles"][target_coord]
+
+    board["tiles"][target_coord] = {
+        "name": f"{event_type.title()} Event",
+        "details": events_data[event_type]["details"],
+        "event": event_type,
+        "emoji": events_data[event_type]["emoji"],
+        "original_tile": original,
+        "event_timestamp": datetime.utcnow().isoformat()
+    }
+
+    file_path = board_path(team)
+    with open(file_path, "w") as f:
+        json.dump(board, f, indent=2)
+    
+    return target_coord, None
+
+def resolve_event_on_board(event_type, team, result):
+    board = load_board(team)
+
+    for coord, tile in board["tiles"].items():
+
+        event = tile.get("event")
+        if event == event_type:
+            if result == "complete":
+                board["tiles"][coord] = tile.get("original_tile", {
+                    "name": "Unknown Waters",
+                    "details": "Restored after mysterious event.",
+                })
+            elif result == "fail":
+                board["tiles"][coord] = {
+                    "name": "Wreckage",
+                    "details": f"This piece of your ship was destroyed by the {event_type}!",
+                }
+            else:
+                return False  
+
+            with open(board_path(team), "w") as f:
+                json.dump(board, f, indent=2)
+            return True
+
+    return False  

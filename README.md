@@ -28,11 +28,19 @@ You're ready to go!
 
 - **!shiptypes**: Show ship types and sizes.
 - **!view_board**: View your team's current board.
-- **!place [ship] [h/v] [starting coord]**: Place a ship on your board. Example: `!place carrier h A,3`.
-- **!remove [ship]**: Remove a ship from your board.
-- **!intro**: Broadcast the introductory details to all team channels. Requires the "Refs" role.
-- **!lockboard**: Lock the board to prevent changes. Requires the "Refs" role.
-- **!unlockboard**: Unlock the board to allow changes. Requires the "Refs" role.
-- **!team_progress**: Show overall progress of teams. Requires the "Refs" role.
+- **!view_enemy_board**: See your enemy's board (without ships, of course!).
+- **!place [shiptype] [h/v] [starting coord]**: Place a ship on your board. Example: `!place carrier h A3`.
+- **!remove [shiptype]**: Remove a ship from your board.
 - **!current_task**: Show your team's current task.
-- **!select [coord]**: Select a coordinate to shoot at. Example: `!select B,5`.
+- **!select [coord]**: Select a coordinate to shoot at. Example: `!select B5`.
+- **!battleship_commands**: View all battleship commands
+
+#### Requires the "Refs" role
+
+- **!intro**: Broadcast the introductory details to all team channels.
+- **!lockboard**: Lock the board to prevent changes.
+- **!unlockboard**: Unlock the board to allow changes.
+- **!team_progress**: Show overall progress of teams.
+- **!eventstart [eventtype]**: Start an event across all team channels.
+- **!eventend [eventtype] [complete/fail]**: Ends an event with either a success message or failure message in _specific_ team channels.
+- **!refs_battleship_commands**: View all ref-specific battleship commands

@@ -1,7 +1,7 @@
 {
   "kraken": {
     "emoji": "🐙",
-    "description": "A wild Kraken has appeared! Defend your ship piece within 12 hours or it will be destroyed.",
+    "details": "A wild Kraken has appeared! Defend your ship piece within 12 hours or it will be destroyed.",
     "duration_hours": 12
   }
 }

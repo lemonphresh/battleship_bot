@@ -1,504 +1,504 @@
 {
   "tiles": [
     {
-      "difficulty": "easy",
-      "name": "Fishing Spot",
-      "description": "description"
+      "name": "Commander Zilyana",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "easy",
-      "name": "Training Dummy",
-      "description": "description"
+      "name": "TzTok-Jad",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "medium",
-      "name": "Chaos Altar",
-      "description": "description"
+      "name": "Vet'ion",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "hard",
-      "name": "God Wars Dungeon",
-      "description": "description"
+      "name": "Leviathan",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "hard",
-      "name": "God Wars Dungeon",
-      "description": "description"
+      "name": "Sarachnis",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "easy",
-      "name": "Fishing Spot",
-      "description": "description"
+      "name": "Venenatis",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "easy",
-      "name": "Training Dummy",
-      "description": "description"
+      "name": "Verzik Vitur",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "medium",
-      "name": "Chaos Altar",
-      "description": "description"
+      "name": "Zalcano",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "hard",
-      "name": "God Wars Dungeon",
-      "description": "description"
+      "name": "Dagannoth Supreme",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "hard",
-      "name": "God Wars Dungeon",
-      "description": "description"
+      "name": "Dagannoth Prime",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "easy",
-      "name": "Fishing Spot",
-      "description": "description"
+      "name": "Wardens",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "easy",
-      "name": "Training Dummy",
-      "description": "description"
+      "name": "Whisperer",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "medium",
-      "name": "Chaos Altar",
-      "description": "description"
+      "name": "Barrows",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "hard",
-      "name": "God Wars Dungeon",
-      "description": "description"
+      "name": "King Black Dragon",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "hard",
-      "name": "God Wars Dungeon",
-      "description": "description"
+      "name": "Tempoross",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "easy",
-      "name": "Fishing Spot",
-      "description": "description"
+      "name": "The Great Olm",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "easy",
-      "name": "Training Dummy",
-      "description": "description"
+      "name": "Kree'arra",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "medium",
-      "name": "Chaos Altar",
-      "description": "description"
+      "name": "Dagannoth Rex",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "hard",
-      "name": "God Wars Dungeon",
-      "description": "description"
+      "name": "Cerberus",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "hard",
-      "name": "God Wars Dungeon",
-      "description": "description"
+      "name": "Corporeal Beast",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "easy",
-      "name": "Fishing Spot",
-      "description": "description"
+      "name": "Thermonuclear Smoke Devil",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "easy",
-      "name": "Training Dummy",
-      "description": "description"
+      "name": "Scorpia",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "medium",
-      "name": "Chaos Altar",
-      "description": "description"
+      "name": "Obor",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "hard",
-      "name": "God Wars Dungeon",
-      "description": "description"
+      "name": "Wintertodt",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "hard",
-      "name": "God Wars Dungeon",
-      "description": "description"
+      "name": "Hueycoatl",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "easy",
-      "name": "Fishing Spot",
-      "description": "description"
+      "name": "Duke Sucellus",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "easy",
-      "name": "Training Dummy",
-      "description": "description"
+      "name": "Crazy Archaeologist",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "medium",
-      "name": "Chaos Altar",
-      "description": "description"
+      "name": "TzKal-Zuk",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "hard",
-      "name": "God Wars Dungeon",
-      "description": "description"
+      "name": "Bryophyta",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "hard",
-      "name": "God Wars Dungeon",
-      "description": "description"
+      "name": "Alchemical Hydra",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "easy",
-      "name": "Fishing Spot",
-      "description": "description"
+      "name": "Moons of Peril",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "easy",
-      "name": "Training Dummy",
-      "description": "description"
+      "name": "Nex",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "medium",
-      "name": "Chaos Altar",
-      "description": "description"
+      "name": "Grotesque Guardians",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "hard",
-      "name": "God Wars Dungeon",
-      "description": "description"
+      "name": "Vardorvis",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "hard",
-      "name": "God Wars Dungeon",
-      "description": "description"
+      "name": "Giant Mole",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "easy",
-      "name": "Fishing Spot",
-      "description": "description"
+      "name": "Chaos Fanatic",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "easy",
-      "name": "Training Dummy",
-      "description": "description"
+      "name": "Kalphite Queen",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "medium",
-      "name": "Chaos Altar",
-      "description": "description"
+      "name": "Kraken",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "hard",
-      "name": "God Wars Dungeon",
-      "description": "description"
+      "name": "Kril Tsutsaroth",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "hard",
-      "name": "God Wars Dungeon",
-      "description": "description"
+      "name": "Hunllef (Corrupted Gauntlet only)",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "easy",
-      "name": "Fishing Spot",
-      "description": "description"
+      "name": "Vorkath",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "easy",
-      "name": "Training Dummy",
-      "description": "description"
+      "name": "Yama",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "medium",
-      "name": "Chaos Altar",
-      "description": "description"
+      "name": "Phantom Muspah",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "hard",
-      "name": "God Wars Dungeon",
-      "description": "description"
+      "name": "Callisto",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "hard",
-      "name": "God Wars Dungeon",
-      "description": "description"
+      "name": "General Graardor",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "easy",
-      "name": "Fishing Spot",
-      "description": "description"
+      "name": "Royal Titans",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "easy",
-      "name": "Training Dummy",
-      "description": "description"
+      "name": "Chaos Elemental",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "medium",
-      "name": "Chaos Altar",
-      "description": "description"
+      "name": "Zulrah",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "hard",
-      "name": "God Wars Dungeon",
-      "description": "description"
+      "name": "The Nightmare",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "hard",
-      "name": "God Wars Dungeon",
-      "description": "description"
+      "name": "Nex",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "easy",
-      "name": "Fishing Spot",
-      "description": "description"
+      "name": "Alchemical Hydra",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "easy",
-      "name": "Training Dummy",
-      "description": "description"
+      "name": "Bryophyta",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "medium",
-      "name": "Chaos Altar",
-      "description": "description"
+      "name": "Sarachnis",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "hard",
-      "name": "God Wars Dungeon",
-      "description": "description"
+      "name": "Hunllef (Corrupted Gauntlet only)",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "hard",
-      "name": "God Wars Dungeon",
-      "description": "description"
+      "name": "Leviathan",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "easy",
-      "name": "Fishing Spot",
-      "description": "description"
+      "name": "Wintertodt",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "easy",
-      "name": "Training Dummy",
-      "description": "description"
+      "name": "Dagannoth Rex",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "medium",
-      "name": "Chaos Altar",
-      "description": "description"
+      "name": "Royal Titans",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "hard",
-      "name": "God Wars Dungeon",
-      "description": "description"
+      "name": "General Graardor",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "hard",
-      "name": "God Wars Dungeon",
-      "description": "description"
+      "name": "Grotesque Guardians",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "easy",
-      "name": "Fishing Spot",
-      "description": "description"
+      "name": "The Nightmare",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "easy",
-      "name": "Training Dummy",
-      "description": "description"
+      "name": "Chaos Elemental",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "medium",
-      "name": "Chaos Altar",
-      "description": "description"
+      "name": "Moons of Peril",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "hard",
-      "name": "God Wars Dungeon",
-      "description": "description"
+      "name": "Barrows",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "hard",
-      "name": "God Wars Dungeon",
-      "description": "description"
+      "name": "Kril Tsutsaroth",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "easy",
-      "name": "Fishing Spot",
-      "description": "description"
+      "name": "Phantom Muspah",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "easy",
-      "name": "Training Dummy",
-      "description": "description"
+      "name": "Kree'arra",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "medium",
-      "name": "Chaos Altar",
-      "description": "description"
+      "name": "Zulrah",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "hard",
-      "name": "God Wars Dungeon",
-      "description": "description"
+      "name": "Vet'ion",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "hard",
-      "name": "God Wars Dungeon",
-      "description": "description"
+      "name": "Cerberus",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "easy",
-      "name": "Fishing Spot",
-      "description": "description"
+      "name": "Venenatis",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "easy",
-      "name": "Training Dummy",
-      "description": "description"
+      "name": "Commander Zilyana",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "medium",
-      "name": "Chaos Altar",
-      "description": "description"
+      "name": "Vardorvis",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "hard",
-      "name": "God Wars Dungeon",
-      "description": "description"
+      "name": "Thermonuclear Smoke Devil",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "hard",
-      "name": "God Wars Dungeon",
-      "description": "description"
+      "name": "Chaos Fanatic",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "easy",
-      "name": "Fishing Spot",
-      "description": "description"
+      "name": "Kraken",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "easy",
-      "name": "Training Dummy",
-      "description": "description"
+      "name": "TzTok-Jad",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "medium",
-      "name": "Chaos Altar",
-      "description": "description"
+      "name": "Verzik Vitur",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "hard",
-      "name": "God Wars Dungeon",
-      "description": "description"
+      "name": "TzKal-Zuk",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "hard",
-      "name": "God Wars Dungeon",
-      "description": "description"
+      "name": "King Black Dragon",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "easy",
-      "name": "Fishing Spot",
-      "description": "description"
+      "name": "Corporeal Beast",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "easy",
-      "name": "Training Dummy",
-      "description": "description"
+      "name": "Duke Sucellus",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "medium",
-      "name": "Chaos Altar",
-      "description": "description"
+      "name": "Scorpia",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "hard",
-      "name": "God Wars Dungeon",
-      "description": "description"
+      "name": "Dagannoth Supreme",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "hard",
-      "name": "God Wars Dungeon",
-      "description": "description"
+      "name": "Giant Mole",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "easy",
-      "name": "Fishing Spot",
-      "description": "description"
+      "name": "Vorkath",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "easy",
-      "name": "Training Dummy",
-      "description": "description"
+      "name": "Yama",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "medium",
-      "name": "Chaos Altar",
-      "description": "description"
+      "name": "Crazy Archaeologist",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "hard",
-      "name": "God Wars Dungeon",
-      "description": "description"
+      "name": "Hueycoatl",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "hard",
-      "name": "God Wars Dungeon",
-      "description": "description"
+      "name": "Zalcano",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "easy",
-      "name": "Fishing Spot",
-      "description": "description"
+      "name": "Whisperer",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "easy",
-      "name": "Training Dummy",
-      "description": "description"
+      "name": "Dagannoth Prime",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "medium",
-      "name": "Chaos Altar",
-      "description": "description"
+      "name": "The Great Olm",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "hard",
-      "name": "God Wars Dungeon",
-      "description": "description"
+      "name": "Wardens",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "hard",
-      "name": "God Wars Dungeon",
-      "description": "description"
+      "name": "Kalphite Queen",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "easy",
-      "name": "Fishing Spot",
-      "description": "description"
+      "name": "Callisto",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "easy",
-      "name": "Training Dummy",
-      "description": "description"
+      "name": "Obor",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "medium",
-      "name": "Chaos Altar",
-      "description": "description"
+      "name": "Tempoross",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "hard",
-      "name": "God Wars Dungeon",
-      "description": "description"
+      "name": "Dagannoth Prime",
+      "count": 1,
+      "details": ""
     },
     {
-      "difficulty": "hard",
-      "name": "God Wars Dungeon",
-      "description": "description"
+      "name": "Alchemical Hydra",
+      "count": 1,
+      "details": ""
     }
   ]
 }

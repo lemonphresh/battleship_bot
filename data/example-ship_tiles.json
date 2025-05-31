@@ -1,97 +1,97 @@
 {
   "carrier": [
     {
-      "difficulty": "hard",
       "name": "Carrier Tile 1",
-      "description": "This is a tile of the carrier ship."
+      "count": 1,
+      "details": "This is a tile of the carrier ship."
     },
     {
-      "difficulty": "hard",
       "name": "Carrier Tile 2",
-      "description": "This is a tile of the carrier ship."
+      "count": 1,
+      "details": "This is a tile of the carrier ship."
     },
     {
-      "difficulty": "hard",
       "name": "Carrier Tile 3",
-      "description": "This is a tile of the carrier ship."
+      "count": 1,
+      "details": "This is a tile of the carrier ship."
     },
     {
-      "difficulty": "hard",
       "name": "Carrier Tile 4",
-      "description": "This is a tile of the carrier ship."
+      "count": 1,
+      "details": "This is a tile of the carrier ship."
     },
     {
-      "difficulty": "hard",
       "name": "Carrier Tile 5",
-      "description": "This is a tile of the carrier ship."
+      "count": 1,
+      "details": "This is a tile of the carrier ship."
     }
   ],
   "battleship": [
     {
-      "difficulty": "medium",
       "name": "Battleship Tile 1",
-      "description": "This is a tile of the battleship."
+      "count": 1,
+      "details": "This is a tile of the battleship."
     },
     {
-      "difficulty": "medium",
       "name": "Battleship Tile 2",
-      "description": "This is a tile of the battleship."
+      "count": 1,
+      "details": "This is a tile of the battleship."
     },
     {
-      "difficulty": "medium",
       "name": "Battleship Tile 3",
-      "description": "This is a tile of the battleship."
+      "count": 1,
+      "details": "This is a tile of the battleship."
     },
     {
-      "difficulty": "medium",
       "name": "Battleship Tile 4",
-      "description": "This is a tile of the battleship."
+      "count": 1,
+      "details": "This is a tile of the battleship."
     }
   ],
   "cruiser": [
     {
-      "difficulty": "medium",
       "name": "Cruiser Tile 1",
-      "description": "This is a tile of the cruiser."
+      "count": 1,
+      "details": "This is a tile of the cruiser."
     },
     {
-      "difficulty": "medium",
       "name": "Cruiser Tile 2",
-      "description": "This is a tile of the cruiser."
+      "count": 1,
+      "details": "This is a tile of the cruiser."
     },
     {
-      "difficulty": "medium",
       "name": "Cruiser Tile 3",
-      "description": "This is a tile of the cruiser."
+      "count": 1,
+      "details": "This is a tile of the cruiser."
     }
   ],
   "submarine": [
     {
-      "difficulty": "easy",
       "name": "Submarine Tile 1",
-      "description": "This is a tile of the submarine."
+      "count": 1,
+      "details": "This is a tile of the submarine."
     },
     {
-      "difficulty": "easy",
       "name": "Submarine Tile 2",
-      "description": "This is a tile of the submarine."
+      "count": 1,
+      "details": "This is a tile of the submarine."
     },
     {
-      "difficulty": "easy",
       "name": "Submarine Tile 3",
-      "description": "This is a tile of the submarine."
+      "count": 1,
+      "details": "This is a tile of the submarine."
     }
   ],
   "destroyer": [
     {
-      "difficulty": "easy",
       "name": "Destroyer Tile 1",
-      "description": "This is a tile of the destroyer."
+      "count": 1,
+      "details": "This is a tile of the destroyer."
     },
     {
-      "difficulty": "easy",
       "name": "Destroyer Tile 2",
-      "description": "This is a tile of the destroyer."
+      "count": 1,
+      "details": "This is a tile of the destroyer."
     }
   ]
 }
