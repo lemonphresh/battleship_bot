@@ -1,7 +1,8 @@
 {
   "kraken": {
     "emoji": "🐙",
-    "details": "A wild Kraken has appeared! Defend your ship piece within 12 hours or it will be destroyed.",
-    "duration_hours": 12
+    "details": "The Kraken stirs! To defend your ship, collect 7 separate cannonball drops from bosses and obtain normal, oak, teak, and mahogany planks from boss drops.",
+    "duration_hours": 12,
+    "reward": "skip"
   }
 }

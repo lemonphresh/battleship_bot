@@ -6,7 +6,7 @@ First, in your console, `touch .env` in the root of this directory. Check the `.
 
 In this `data` directory, you'll find some example files. One (`example-base_tiles.json`) is the format you'll use for your new `base_tiles.json`, where you'll populate all of the data for the tiles with which you will randomly assign to the boards used for each team. One (`example-ship_tiles.json`) is the format that you'll want to use for your new `ship_tiles.json`, which determines the tiles that make up the five ships. Finally, there's an example (`example-board_teamA.json`) of what the data will look like when the bot tracks a team's board. This will automatically be created as the gameplay carries out.
 
-You'll need to add the bot to your Discord server. Create at least two (2) channels in your server, right click the channels and grab the channel IDs from each and replace the values found in `config.py` in the `TEAM_CHANNELS` constant. (You'll need to enable developer view in your Discord account settings to see those IDs!)
+You'll need to add the bot to your Discord server. Create at least two (2) channels in your server, right click the channels and grab the channel IDs from each and replace the values found in `config.py` in the `TEAM_CHANNELS` constant. (You'll need to enable developer view in your Discord account settings to see those IDs!) You'll also want to add a `#spectators-channel` and grab that ID to replace the value in `config.py`.
 
 Next, add a "refs" role to your Discord server. Assign those you want to have admin powers to that role. Then, simply populate the team channels with the respective participants.
 
@@ -20,9 +20,12 @@ You're ready to go!
 
 3. Once all five boats have been placed for each team and whatever amount of time you've allotted the players to strategize and place boats has passed, run the `!lockboard` commands in each channel.
 
-4. Now, teams can start selecting where to strike on their opponent's board with `!select [coordinates]`. There will be a cooldown after selecting a tile to prevent people from griefing. This will post in both the selecting team's channel and the opposing team's channel to communicate whether there was a hit on a boat or a miss, and it will also explain what the tile entails.
+4. Run `!beginbattle` once all boards are locked. This will send out the gameplay commands to the teams.
 
-5. The teams will have to complete the tiles' tasks and post proof in their respective drops channels to carry on.
+5. Now, teams can start selecting where to strike on their opponent's board with `!select [coordinates]`. There will be a cooldown after selecting a tile to prevent people from griefing. This will post in both the selecting team's channel and the opposing team's channel to communicate whether there was a hit on a boat or a miss, and it will also explain what the tile entails.
+   5.a. something something events
+
+6. The teams will have to complete the tiles' tasks and post proof in their respective drops channels to carry on.
 
 ### Commands
 

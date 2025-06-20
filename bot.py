@@ -5,9 +5,10 @@ import json
 from datetime import datetime, timedelta, timezone
 from discord.ext import commands
 from utils.game import (
-    apply_event_to_board, generate_board, handle_tile_selection, current_task_command, render_board_preview,
-    board_path, place_ship_to_file, remove_ship_from_file, load_board, render_board_with_shots, resolve_event_on_board
+    announce_to_spectators, apply_event_to_board, generate_board, generate_match_summary, get_last_shot, handle_tile_selection, current_task_command, load_active_skips, load_skip_tokens, render_board_preview,
+    board_path, place_ship_to_file, last_shot_time, remove_ship_from_file, load_board, render_board_with_shots, resolve_event_on_board, save_active_skips, save_skip_tokens
 )
+
 
 required_ships = ["carrier", "battleship", "cruiser", "submarine", "destroyer"]
 
@@ -92,6 +93,18 @@ def user_has_refs_role(ctx):
     refs_role = discord.utils.get(ctx.guild.roles, name="refs")
     return refs_role in ctx.author.roles
 
+async def send_to_team_channel(team_key, message):
+    channel_id = config.TEAM_CHANNELS.get(team_key)
+    if channel_id:
+        channel = bot.get_channel(channel_id)
+        if channel:
+            await channel.send(message)
+
+async def announce_to_spectators(bot, message):
+    channel = bot.get_channel(config.SPECTATOR_CHANNEL_ID)
+    if channel:
+        await channel.send(message)
+
 # Commands
 @bot.command(name="shiptypes")
 async def show_ship_types(ctx):
@@ -120,6 +133,18 @@ async def preview_board(ctx):
     
     await ctx.send(preview)
 
+@bot.command()
+async def skips(ctx):
+    team = get_team_from_channel(ctx.channel.id)
+    if not team:
+        await ctx.send("⚠️ Could not determine team from this channel.")
+        return
+
+    tokens = load_skip_tokens()
+    count = tokens.get(team, 0)
+
+    await ctx.send(f"🪙 **{config.TEAM_DISPLAY[team]}** has **{count}** skip token(s) remaining.")
+
 @bot.command(name="view_enemy_board")
 async def view_enemy_board(ctx):
     team = get_team_from_channel(ctx.channel.id)
@@ -127,7 +152,7 @@ async def view_enemy_board(ctx):
         await ctx.send("Could not detect your team.")
         return
 
-    opponent = config.TEAM_PAIRS.get(team)
+    opponent = config.TEAM_DISPLAY[config.TEAM_PAIRS.get(team)]
     if not opponent:
         await ctx.send("No opponent defined for your team.")
         return
@@ -145,7 +170,7 @@ async def team(ctx):
         await ctx.send("No team.")
         return
 
-    await ctx.send(f"You're on **{team}**!")
+    await ctx.send(f"You're on **{config.TEAM_DISPLAY[team]}**!")
 
 @bot.command(name="place")
 async def place_command(ctx, ship_type: str, orientation: str, start_coord: str):
@@ -238,8 +263,8 @@ async def board_status(ctx, team: str):
         return
 
     team = team.lower()
-    if team not in ["teama", "teamb"]:
-        await ctx.send("❌ Invalid team. Use `teamA` or `teamB`.")
+    if team not in ["annebonny", "maryread"]:
+        await ctx.send("❌ Invalid team. Use `anneBonny` or `maryRead`.")
         return
 
     board = load_board(team) 
@@ -293,6 +318,42 @@ async def team_progress(ctx):
 
     await ctx.send("📈 **Team Progress Report**\n" + "\n\n".join(progress_msgs))
 
+@bot.command()
+async def use_skip(ctx):
+    global last_shot_time 
+
+    team = get_team_from_channel(ctx.channel.id)
+    if not team:
+            await ctx.send("⚠️ Could not determine team from this channel.")
+            return
+    
+    last = get_last_shot(team)
+    if not last:
+        await ctx.send(f"⚠️ No shot history found for {config.TEAM_DISPLAY[team]}.")
+        return
+    if last["hit"]:
+        await ctx.send(f"⚠️ Your last shot at **{last['coord']}** was a hit — skips are only usable after misses.")
+        return
+
+    # Check and consume skip token
+    tokens = load_skip_tokens()
+    if tokens.get(team, 0) <= 0:
+        await ctx.send(f"❌ {config.TEAM_DISPLAY[team]} has no skip tokens remaining.")
+        return
+
+    tokens[team] -= 1
+    save_skip_tokens(tokens)
+
+    # Clear cooldown
+    if team in last_shot_time:
+        del last_shot_time[team]
+
+    await ctx.send(
+        f"✅ {config.TEAM_DISPLAY[team]} has used a **skip** after missing at **{last['coord']}**.\n"
+        f"You may now fire again immediately!\n\n"
+        f"🪙 Remaining skip tokens: **{tokens[team]}**"
+    )
+
 @bot.command(name="current_task")
 async def current_task(ctx):
     team = get_team_from_channel(ctx.channel.id)
@@ -301,8 +362,8 @@ async def current_task(ctx):
         return
 
     boards = {
-        "teamA": load_board("teamA") if board_exists("teamA") else None,
-        "teamB": load_board("teamB") if board_exists("teamB") else None
+        "anneBonny": load_board("anneBonny") if board_exists("anneBonny") else None,
+        "maryRead": load_board("maryRead") if board_exists("maryRead") else None
     }
 
     await current_task_command(team, boards, ctx)
@@ -315,12 +376,12 @@ async def select(ctx, coord: str):
         return
 
     boards = {
-        "teamA": load_board("teamA") if board_exists("teamA") else None,
-        "teamB": load_board("teamB") if board_exists("teamB") else None
+        "anneBonny": load_board("anneBonny") if board_exists("anneBonny") else None,
+        "maryRead": load_board("maryRead") if board_exists("maryRead") else None
     }
     # normalize coordinate format
     coord = coord.upper().replace(",", "")
-    result = handle_tile_selection(team, coord, boards, config.TEAM_CHANNELS)
+    result = handle_tile_selection(ctx.bot, team, coord, boards, config.TEAM_CHANNELS)
 
     if "error" in result:
         await ctx.send(result["error"])
@@ -351,6 +412,7 @@ async def intro(ctx):
         "# 🦜 **Ahoy, Captains! Welcome to Battleship: EG Edition!** ⚓\n\n"
         "The high seas await, and war is brewing on the waves! Each team commands a mighty fleet, hidden away on secret boards. "
         "Your mission? Outsmart, outmaneuver, and out-blast your foes in a battle of brains and bravery.\n\n"
+        "You are on **{config.TEAM_DISPLAY[get_team_from_channel(ctx.channel.id)]}**\n\n"
         "**Here’s how your voyage will unfold:**\n\n"
         "1. **Chart Your Waters:** Each team is assigned a hidden board — your home port. Your ships must be placed in secret across the 10x10 grid. "
         "Work with your crew to position them wisely. Sabotage awaits the sloppy! ~~and sloppy awaits the saboteurs~~\n\n"
@@ -381,8 +443,8 @@ async def intro(ctx):
     ) + "\n⚓ ⚓ ⚓"
 
     boards = {
-        "teamA": load_board("teamA") if board_exists("teamA") else None,
-        "teamB": load_board("teamB") if board_exists("teamB") else None
+        "anneBonny": load_board("anneBonny") if board_exists("anneBonny") else None,
+        "maryRead": load_board("maryRead") if board_exists("maryRead") else None
     }
 
     for team, channel_id in config.TEAM_CHANNELS.items():
@@ -434,6 +496,8 @@ async def begin_battle(ctx):
         "`!view_board` – See your current board\n"
         "`!view_enemy_board` – See your enemy's board (without ships, of course!) \n"
         "`!battleship_commands` – View all battleship commands\n"
+        "`!skips` – Check your skip tokens\n"
+        "`!use_skip` – Use a skip token to fire again immediately after a miss\n"
         "⚓ ⚓ ⚓"
     )
 
@@ -458,6 +522,8 @@ async def battleship_commands(ctx):
     embed.add_field(name="!remove <ship>", value="Remove a ship from your board.", inline=False)
     embed.add_field(name="!current_task", value="Show your team's current task.", inline=False)
     embed.add_field(name="!select <coord>", value="Select a coordinate to shoot at. Example: `!select B5`", inline=False)
+    embed.add_field(name="!skips", value="Check your skip tokens.", inline=False)
+    embed.add_field(name="!use_skip", value="Use a skip token to fire again immediately after a miss.", inline=False)
     
     await ctx.send(embed=embed)
 
@@ -477,6 +543,8 @@ async def refs_battleship_commands(ctx):
     embed.add_field(name="!beginbattle", value="Once boards are locked, start the battle and send the battle instructions.", inline=False)
     embed.add_field(name="!eventstart <event_type>", value="Start a random event for all teams.", inline=False)
     embed.add_field(name="!eventend <event_type> <complete|fail>", value="End a random event for the current team.", inline=False)
+    embed.add_field(name="!matchsummary", value="Send a match summary to the spectator channel.", inline=False)
+    embed.add_field(name="!win <winner>", value="Declare a winner and send victory messages.", inline=False)
 
     await ctx.send(embed=embed)
 
@@ -526,7 +594,7 @@ async def end_event(ctx, event_type: str, result: str):
         return
 
     if result not in ["complete", "fail"]:
-        await ctx.send("⚠️ Usage: `!eventend kraken complete|fail`")
+        await ctx.send("⚠️ Usage: `!eventend [event_type] complete|fail`")
         return
 
     team = get_team_from_channel(ctx.channel.id)
@@ -534,22 +602,150 @@ async def end_event(ctx, event_type: str, result: str):
         await ctx.send("⚠️ Could not determine team from this channel.")
         return
 
-    success = resolve_event_on_board(event_type, team, result)
+    # Load event data
+    try:
+        with open("data/random_events.json") as f:
+            events_data = json.load(f)
+    except Exception:
+        await ctx.send("❌ Could not load events config.")
+        return
+
+    event_def = events_data.get(event_type)
+    if not event_def:
+        await ctx.send(f"❌ Unknown event type: `{event_type}`")
+        return
+
+    reward = event_def.get("reward")
+
+    # Resolve the event
+    success = resolve_event_on_board(event_type, team, result, events_data=events_data)
     if not success:
         await ctx.send(f"⚠️ No active `{event_type}` event found to resolve for `{team}`.")
         return
 
+    # Messaging logic
     if result == "complete":
-        await ctx.send(
-            f"✅ **{event_type.title()} Event Complete!**\n\n"
-            f"Your crew faced the tide and triumphed. The menace has been repelled — your ship remains afloat! ⛵"
-        )
-    else:
-        await ctx.send(
-            f"💀 **{event_type.title()} Event Failed...**\n\n"
-            f"A dark fate befalls your fleet. The ocean has claimed its toll... a ship tile is lost to the deep. ⚓"
-        )
-    print(f"{event_type} event resolved for {team}: {result}")
+        if reward == "skip":
+            await ctx.send(
+                f"✅ **{event_type.title()} Complete!**\n\n"
+                f"You conquered the challenge and bested the seas! 🌊\n"
+                f"The targeted tile is now considered **complete** and will no longer obstruct your journey.\n\n"
+                f"As a reward, your crew has earned **1 skip token**. Use it wisely on any future missed shot! 🪙"
+            )
+        else:
+            await ctx.send(
+                f"✅ **{event_type.title()} Event Complete!**\n\n"
+                f"Your crew faced the tide and triumphed. The menace has been repelled — your ship remains afloat! ⛵"
+            )
+    else:  # result == "fail"
+        if reward == "skip":
+            await ctx.send(
+                f"💀 **{event_type.title()} Prevails, and You Failed...**\n\n"
+                f"The winds howled and chaos ensued. The targeted tile remains **unresolved**. Stay wary! ⚠️"
+            )
+        else:
+            await ctx.send(
+                f"💀 **{event_type.title()} Event Failed...**\n\n"
+                f"A dark fate befalls your fleet. The ocean has claimed its toll... a ship tile is lost to the deep. ⚓"
+            )
+
+    ctx.send(f"{event_type} event resolved for {team}: {result}")
+
+@bot.command()
+async def matchsummary(ctx):
+    if not user_has_refs_role(ctx):
+        await ctx.send("❌ You need the `refs` role to use this command.")
+        return
+
+    try:
+        boardA = load_board("anneBonny")
+        boardB = load_board("maryRead")
+    except Exception:
+        await ctx.send("❌ Failed to load one or both boards.")
+        return
+
+    summary = generate_match_summary(boardA, boardB)
+    await announce_to_spectators(ctx.bot, summary)
+
+    await ctx.send("📣 Match summary sent to the spectator channel!")
+
+
+
+@bot.command()
+async def win(ctx, winner: str):
+    if not user_has_refs_role(ctx):
+        await ctx.send("❌ You need the `refs` role to use this command.")
+        return
+
+    loser = config.TEAM_PAIRS.get(winner)
+    if not winner or not loser:
+        await ctx.send("⚠️ Invalid team. Usage: `!win anneBonny` or `!win maryRead`")
+        return
+
+    try:
+        board_winner = load_board(winner)
+        board_loser = load_board(loser)
+    except Exception:
+        await ctx.send("❌ Error loading boards. Are they complete?")
+        return
+
+    summary = generate_match_summary(board_winner, board_loser)
+    winner_name = config.TEAM_DISPLAY[winner]
+    loser_name = config.TEAM_DISPLAY[loser]
+
+    # 🏴‍☠️ Pirate GIFs
+    WIN_GIF = "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMWlqdmpzMHg1ZW0wZWo2NDh6NzkzMHA2M280ZDhrdHN0YTgybHd3diZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/10X22vzgNamaiI/giphy.gif"
+    LOSE_GIF = "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExNjdramN2cHZzdmMzZDZ6Z2NnaXNhdXc4d250YTd2YnV0cjF4Z3RpeiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/KdkAUTLT0TJBofZDOc/giphy.gif"
+    SPECTATOR_GIF = "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExYnVjY3pjNDk1YTg5ZGpvcGJ0bDFjeHR3YzZ0aHFybHF5cWFsanIybSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/dCM60S7zcatpm8lTvB/giphy.gif"
+
+    # 🏆 Winning message
+    win_embed = discord.Embed(
+        title="🏴‍☠️ Victory, me hearties!",
+        description=(
+            f"The salty winds were with ye, and the enemy fleet lies in tatters on the ocean floor.\n"
+            f"Your name shall be etched into the map — **{winner_name} reigns supreme!**"
+        ),
+        color=0xFFD700
+    )
+    win_embed.set_image(url=WIN_GIF)
+
+    # 💔 Losing message
+    lose_embed = discord.Embed(
+        title="💧 A noble fight, sailors.",
+        description=(
+            f"Though the tide turned against ye, your cannons thundered with valor.\n"
+            f"The sea remembers courage — and **{loser_name}** shall rise again!"
+        ),
+        color=0x4682B4
+    )
+    lose_embed.set_image(url=LOSE_GIF)
+
+    # 📣 Spectator message
+    spec_embed = discord.Embed(
+        title="🎙️ THE BATTLE IS OVER!",
+        description=(
+            f"🏆 **{winner_name}** has claimed the sea!\n"
+            f"📉 **{loser_name}** fought fiercely, but the tide was cruel.\n\n"
+            f"📊 **Match Summary:**\n\n{summary}"
+        ),
+        color=0x1E90FF
+    )
+    spec_embed.set_image(url=SPECTATOR_GIF)
+
+    await ctx.send("📣 Sending post-match messages...")
+
+    # Send messages
+    winner_channel = bot.get_channel(config.TEAM_CHANNELS[winner])
+    loser_channel = bot.get_channel(config.TEAM_CHANNELS[loser])
+    spec_channel = bot.get_channel(config.SPECTATOR_CHANNEL_ID)
+
+    if winner_channel:
+        await winner_channel.send(embed=win_embed)
+    if loser_channel:
+        await loser_channel.send(embed=lose_embed)
+    if spec_channel:
+        await spec_channel.send(embed=spec_embed)
+
 
 # Event Handlers
 @bot.event
