@@ -1,504 +1,429 @@
 {
   "tiles": [
     {
-      "name": "Commander Zilyana",
-      "count": 1,
-      "details": ""
-    },
-    {
-      "name": "TzTok-Jad",
-      "count": 1,
-      "details": ""
-    },
-    {
-      "name": "Vet'ion",
-      "count": 1,
-      "details": ""
-    },
-    {
-      "name": "Leviathan",
-      "count": 1,
-      "details": ""
-    },
-    {
-      "name": "Sarachnis",
-      "count": 1,
-      "details": ""
-    },
-    {
-      "name": "Venenatis",
-      "count": 1,
-      "details": ""
-    },
-    {
-      "name": "Verzik Vitur",
-      "count": 1,
-      "details": ""
-    },
-    {
-      "name": "Zalcano",
-      "count": 1,
-      "details": ""
-    },
-    {
-      "name": "Dagannoth Supreme",
-      "count": 1,
-      "details": ""
-    },
-    {
-      "name": "Dagannoth Prime",
-      "count": 1,
-      "details": ""
-    },
-    {
-      "name": "Wardens",
-      "count": 1,
-      "details": ""
-    },
-    {
-      "name": "Whisperer",
-      "count": 1,
-      "details": ""
-    },
-    {
-      "name": "Barrows",
-      "count": 1,
-      "details": ""
-    },
-    {
-      "name": "King Black Dragon",
-      "count": 1,
-      "details": ""
-    },
-    {
-      "name": "Tempoross",
-      "count": 1,
-      "details": ""
-    },
-    {
-      "name": "The Great Olm",
-      "count": 1,
-      "details": ""
+      "name": "Uniques from Commander Zilyana",
+      "count": 2,
+      "details": "Valid uniques include the pet, saradomin sword, saradomin light, armadyl crossbow, and saradomin hilt."
     },
     {
-      "name": "Kree'arra",
-      "count": 1,
-      "details": ""
+      "name": "Uniques from Vet'ion/Calvar'ion",
+      "count": 2,
+      "details": "Valid uniques include the pet, skull of vet'ion, dragon 2h sword, dragon pickaxe, voidwaker blade, and ring of the gods."
     },
     {
-      "name": "Dagannoth Rex",
-      "count": 1,
-      "details": ""
+      "name": "Uniques from Duke Sucellus or Leviathan",
+      "count": 2,
+      "details": "Valid uniques include the pet, virtus, vestige, ingot, soul reaper axe piece, or quartz."
     },
     {
-      "name": "Cerberus",
+      "name": "Unique from Sarachnis",
       "count": 1,
-      "details": ""
+      "details": "Valid uniques are the sarachnis cudgel, pet, and jar"
     },
     {
-      "name": "Corporeal Beast",
-      "count": 1,
-      "details": ""
+      "name": "Uniques from Venenatis/Spindel",
+      "count": 2,
+      "details": "Valid uniques include the pet, fangs of venenatis, dragon 2h sword, dragon pickaxe, voidwaker gem, and treasonous ring."
     },
     {
-      "name": "Thermonuclear Smoke Devil",
-      "count": 1,
-      "details": ""
+      "name": "Uniques from Dagannoth Kings",
+      "count": 5,
+      "details": "Valid uniques include pets, warrior ring, berserker ring, seers ring, archers ring, mud battlestaff, seercull, and dragon axe."
     },
     {
-      "name": "Scorpia",
-      "count": 1,
-      "details": ""
+      "name": "Uniques from Whisperer or Vardorvis",
+      "count": 2,
+      "details": "Valid uniques include the pet, virtus, vestige, ingot, soul reaper axe piece, or quartz"
     },
     {
-      "name": "Obor",
-      "count": 1,
-      "details": ""
+      "name": "Uniques from King Black Dragon",
+      "count": 2,
+      "details": "Valid uniques include pet, KBD heads, draogn pickaxe, draconic visage."
     },
     {
-      "name": "Wintertodt",
-      "count": 1,
-      "details": ""
+      "name": "Uniques from Kree'arra",
+      "count": 2,
+      "details": "Valid uniques include pet, armadyl helm, armadyl chainskirt, armadyl chestplate, and armadyl hilt."
     },
     {
-      "name": "Hueycoatl",
-      "count": 1,
-      "details": ""
+      "name": "Uniques from Slayer Boss",
+      "count": 3,
+      "details": "Valid uniques include any collection log item FROM A SLAYER EXCLUSIVE BOSS. Teleports do not count."
     },
     {
-      "name": "Duke Sucellus",
-      "count": 1,
-      "details": ""
+      "name": "Uniques from Slayer Boss",
+      "count": 3,
+      "details": "Valid uniques include any collection log item FROM A SLAYER EXCLUSIVE BOSS. Teleports do not count."
     },
     {
-      "name": "Crazy Archaeologist",
-      "count": 1,
-      "details": ""
+      "name": "Uniques from Slayer Boss",
+      "count": 3,
+      "details": "Valid uniques include any collection log item FROM A SLAYER EXCLUSIVE BOSS. Teleports do not count."
     },
     {
-      "name": "TzKal-Zuk",
-      "count": 1,
-      "details": ""
+      "name": "Uniques from Slayer Boss",
+      "count": 3,
+      "details": "Valid uniques include any collection log item FROM A SLAYER EXCLUSIVE BOSS. Teleports do not count."
     },
     {
-      "name": "Bryophyta",
-      "count": 1,
-      "details": ""
+      "name": "Uniques from Slayer Boss",
+      "count": 3,
+      "details": "Valid uniques include any collection log item FROM A SLAYER EXCLUSIVE BOSS. Teleports do not count."
     },
     {
-      "name": "Alchemical Hydra",
-      "count": 1,
-      "details": ""
+      "name": "Uniques from Slayer Boss",
+      "count": 3,
+      "details": "Valid uniques include any collection log item FROM A SLAYER EXCLUSIVE BOSS. Teleports do not count."
     },
     {
-      "name": "Moons of Peril",
-      "count": 1,
-      "details": ""
+      "name": "Uniques from Slayer Boss",
+      "count": 3,
+      "details": "Valid uniques include any collection log item FROM A SLAYER EXCLUSIVE BOSS. Teleports do not count."
     },
     {
-      "name": "Nex",
+      "name": "Unique from Corporeal Beast",
       "count": 1,
-      "details": ""
+      "details": "Valid uniques include any sigil, spirit shield, holy elixir. ALTS MAY NOT BE USED. You may only kill corp with members of your team."
     },
     {
-      "name": "Grotesque Guardians",
-      "count": 1,
-      "details": ""
+      "name": "Uniques from Hueycoatl",
+      "count": 2,
+      "details": "Valid uniques include the pet, hueycoatl hide, tome of earth, dragon hunter wand. ALTS MAY NOT BE USED."
     },
     {
-      "name": "Vardorvis",
-      "count": 1,
-      "details": ""
+      "name": "Uniques from Moons of Peril",
+      "count": 4,
+      "details": "Valid uniques include any armor piece or weapon. Atlatl darts do not count."
     },
     {
-      "name": "Giant Mole",
-      "count": 1,
-      "details": ""
+      "name": "Uniques from Kalphite Queen",
+      "count": 3,
+      "details": "Valid uniqes include the KQ head (tattered does not count), dragon pickaxe, dragon 2h sword, and dragon chainbody."
     },
     {
-      "name": "Chaos Fanatic",
-      "count": 1,
-      "details": ""
+      "name": "Uniques from Kril Tsutsaroth",
+      "count": 3,
+      "details": "Valid uniques include the pet, steam battlestaff, zamorakian spear, staff of the dead, and zamorak hilt."
     },
     {
-      "name": "Kalphite Queen",
-      "count": 1,
-      "details": ""
+      "name": "Uniques from Hunllef",
+      "count": 2,
+      "details": "Valid uniques include the pet, crystal weapon seed, crystal armor seed, enhanced crystal weapon seed."
     },
     {
-      "name": "Kraken",
-      "count": 1,
-      "details": ""
+      "name": "Uniques from Vorkath",
+      "count": 5,
+      "details": "Valid uniques include the pet, jar, vorkath head, dragonbone necklace, draconic visage, and skeletal visage."
     },
     {
-      "name": "Kril Tsutsaroth",
-      "count": 1,
-      "details": ""
+      "name": "Uniques from Phantom Muspah",
+      "count": 4,
+      "details": "Valid uniques include the pet, ancient icon, and venator shard."
     },
     {
-      "name": "Hunllef (Corrupted Gauntlet only)",
-      "count": 1,
-      "details": ""
+      "name": "Uniques from Callisto/Artio",
+      "count": 2,
+      "details": "Valid uniques include the pet, claws of callisto, dragon 2h sword, dragon pickaxe, voidwaker hilt, and tyrannical ring."
     },
     {
-      "name": "Vorkath",
-      "count": 1,
-      "details": ""
+      "name": "Uniques from General Graardor",
+      "count": 2,
+      "details": "Valid uniques include the pet, bandos chestplate, bandos tassets, bandos boots, and bandos hilt."
     },
     {
-      "name": "Yama",
-      "count": 1,
-      "details": ""
+      "name": "Uniques from Royal Titans",
+      "count": 2,
+      "details": "Two element staff pieces"
     },
     {
-      "name": "Phantom Muspah",
-      "count": 1,
-      "details": ""
+      "name": "Uniques from Zulrah",
+      "count": 2,
+      "details": "Valid uniques are pet, jar, tanzanite fang, magic fang, serpentine visage, uncut onyx, either mutagen."
     },
     {
-      "name": "Callisto",
-      "count": 1,
+      "name": "Sulphur Blades",
+      "count": 4,
       "details": ""
     },
     {
-      "name": "General Graardor",
-      "count": 1,
+      "name": "Glacial Temotli from Amoxliatl",
+      "count": 3,
       "details": ""
     },
     {
-      "name": "Royal Titans",
-      "count": 1,
+      "name": "Black Mask",
+      "count": 2,
       "details": ""
     },
     {
-      "name": "Chaos Elemental",
-      "count": 1,
+      "name": "Dark Bows",
+      "count": 2,
       "details": ""
     },
     {
-      "name": "Zulrah",
+      "name": "Pair of Aranea Boots",
       "count": 1,
       "details": ""
     },
     {
-      "name": "The Nightmare",
+      "name": "Zombie Axe AND 1 Zombie Helmet",
       "count": 1,
       "details": ""
     },
     {
-      "name": "Nex",
-      "count": 1,
-      "details": ""
+      "name": "Uniques from Demonic Gorillas",
+      "count": 3,
+      "details": "Valid uniques include the zenyte shard, ballista limbs, ballista spring, light frame, heavy frame, and monkey tail."
     },
     {
-      "name": "Alchemical Hydra",
-      "count": 1,
-      "details": ""
+      "name": "Uniques from Commander Zilyana",
+      "count": 2,
+      "details": "Valid uniques include the pet, saradomin sword, saradomin light, armadyl crossbow, and saradomin hilt."
     },
     {
-      "name": "Bryophyta",
-      "count": 1,
-      "details": ""
+      "name": "Uniques from Vet'ion/Calvar'ion",
+      "count": 2,
+      "details": "Valid uniques include the pet, skull of vet'ion, dragon 2h sword, dragon pickaxe, voidwaker blade, and ring of the gods."
     },
     {
-      "name": "Sarachnis",
-      "count": 1,
-      "details": ""
+      "name": "Uniques from Duke Sucellus or Leviathan",
+      "count": 2,
+      "details": "Valid uniques include the pet, virtus, vestige, ingot, soul reaper axe piece, or quartz."
     },
     {
-      "name": "Hunllef (Corrupted Gauntlet only)",
+      "name": "Unique from Sarachnis",
       "count": 1,
-      "details": ""
+      "details": "Valid uniques are the sarachnis cudgel, pet, and jar"
     },
     {
-      "name": "Leviathan",
-      "count": 1,
-      "details": ""
+      "name": "Uniques from Venenatis/Spindel",
+      "count": 2,
+      "details": "Valid uniques include the pet, fangs of venenatis, dragon 2h sword, dragon pickaxe, voidwaker gem, and treasonous ring."
     },
     {
-      "name": "Wintertodt",
-      "count": 1,
-      "details": ""
+      "name": "Uniques from Dagannoth Kings",
+      "count": 5,
+      "details": "Valid uniques include pets, warrior ring, berserker ring, seers ring, archers ring, mud battlestaff, seercull, and dragon axe."
     },
     {
-      "name": "Dagannoth Rex",
-      "count": 1,
-      "details": ""
+      "name": "Uniques from Whisperer or Vardorvis",
+      "count": 2,
+      "details": "Valid uniques include the pet, virtus, vestige, ingot, soul reaper axe piece, or quartz"
     },
     {
-      "name": "Royal Titans",
-      "count": 1,
-      "details": ""
+      "name": "Uniques from King Black Dragon",
+      "count": 2,
+      "details": "Valid uniques include pet, KBD heads, draogn pickaxe, draconic visage."
     },
     {
-      "name": "General Graardor",
-      "count": 1,
-      "details": ""
+      "name": "Uniques from Kree'arra",
+      "count": 2,
+      "details": "Valid uniques include pet, armadyl helm, armadyl chainskirt, armadyl chestplate, and armadyl hilt."
     },
     {
-      "name": "Grotesque Guardians",
-      "count": 1,
-      "details": ""
+      "name": "Uniques from Slayer Boss",
+      "count": 3,
+      "details": "Valid uniques include any collection log item FROM A SLAYER EXCLUSIVE BOSS. Teleports do not count."
     },
     {
-      "name": "The Nightmare",
-      "count": 1,
-      "details": ""
+      "name": "Uniques from Slayer Boss",
+      "count": 3,
+      "details": "Valid uniques include any collection log item FROM A SLAYER EXCLUSIVE BOSS. Teleports do not count."
     },
     {
-      "name": "Chaos Elemental",
-      "count": 1,
-      "details": ""
+      "name": "Uniques from Slayer Boss",
+      "count": 3,
+      "details": "Valid uniques include any collection log item FROM A SLAYER EXCLUSIVE BOSS. Teleports do not count."
     },
     {
-      "name": "Moons of Peril",
-      "count": 1,
-      "details": ""
+      "name": "Uniques from Slayer Boss",
+      "count": 3,
+      "details": "Valid uniques include any collection log item FROM A SLAYER EXCLUSIVE BOSS. Teleports do not count."
     },
     {
-      "name": "Barrows",
-      "count": 1,
-      "details": ""
+      "name": "Uniques from Slayer Boss",
+      "count": 3,
+      "details": "Valid uniques include any collection log item FROM A SLAYER EXCLUSIVE BOSS. Teleports do not count."
     },
     {
-      "name": "Kril Tsutsaroth",
-      "count": 1,
-      "details": ""
+      "name": "Uniques from Slayer Boss",
+      "count": 3,
+      "details": "Valid uniques include any collection log item FROM A SLAYER EXCLUSIVE BOSS. Teleports do not count."
     },
     {
-      "name": "Phantom Muspah",
-      "count": 1,
-      "details": ""
+      "name": "Uniques from Slayer Boss",
+      "count": 3,
+      "details": "Valid uniques include any collection log item FROM A SLAYER EXCLUSIVE BOSS. Teleports do not count."
     },
     {
-      "name": "Kree'arra",
+      "name": "Unique from Corporeal Beast",
       "count": 1,
-      "details": ""
+      "details": "Valid uniques include any sigil, spirit shield, holy elixir. ALTS MAY NOT BE USED. You may only kill corp with members of your team."
     },
     {
-      "name": "Zulrah",
-      "count": 1,
-      "details": ""
+      "name": "Uniques from Hueycoatl",
+      "count": 2,
+      "details": "Valid uniques include the pet, hueycoatl hide, tome of earth, dragon hunter wand. ALTS MAY NOT BE USED."
     },
     {
-      "name": "Vet'ion",
-      "count": 1,
-      "details": ""
+      "name": "Uniques from Moons of Peril",
+      "count": 4,
+      "details": "Valid uniques include any armor piece or weapon. Atlatl darts do not count."
     },
     {
-      "name": "Cerberus",
-      "count": 1,
-      "details": ""
+      "name": "Uniques from Kalphite Queen",
+      "count": 3,
+      "details": "Valid uniqes include the KQ head (tattered does not count), dragon pickaxe, dragon 2h sword, and dragon chainbody."
     },
     {
-      "name": "Venenatis",
-      "count": 1,
-      "details": ""
+      "name": "Uniques from Kril Tsutsaroth",
+      "count": 3,
+      "details": "Valid uniques include the pet, steam battlestaff, zamorakian spear, staff of the dead, and zamorak hilt."
     },
     {
-      "name": "Commander Zilyana",
-      "count": 1,
-      "details": ""
+      "name": "Uniques from Hunllef",
+      "count": 2,
+      "details": "Valid uniques include the pet, crystal weapon seed, crystal armor seed, enhanced crystal weapon seed."
     },
     {
-      "name": "Vardorvis",
-      "count": 1,
-      "details": ""
+      "name": "Uniques from Vorkath",
+      "count": 5,
+      "details": "Valid uniques include the pet, jar, vorkath head, dragonbone necklace, draconic visage, and skeletal visage."
     },
     {
-      "name": "Thermonuclear Smoke Devil",
-      "count": 1,
-      "details": ""
+      "name": "Uniques from Phantom Muspah",
+      "count": 4,
+      "details": "Valid uniques include the pet, ancient icon, and venator shard."
     },
     {
-      "name": "Chaos Fanatic",
-      "count": 1,
-      "details": ""
+      "name": "Uniques from Callisto/Artio",
+      "count": 2,
+      "details": "Valid uniques include the pet, claws of callisto, dragon 2h sword, dragon pickaxe, voidwaker hilt, and tyrannical ring."
     },
     {
-      "name": "Kraken",
-      "count": 1,
-      "details": ""
+      "name": "Uniques from General Graardor",
+      "count": 2,
+      "details": "Valid uniques include the pet, bandos chestplate, bandos tassets, bandos boots, and bandos hilt."
     },
     {
-      "name": "TzTok-Jad",
-      "count": 1,
-      "details": ""
+      "name": "Uniques from Royal Titans",
+      "count": 2,
+      "details": "Two element staff pieces"
     },
     {
-      "name": "Verzik Vitur",
-      "count": 1,
-      "details": ""
+      "name": "Uniques from Zulrah",
+      "count": 2,
+      "details": "Valid uniques are pet, jar, tanzanite fang, magic fang, serpentine visage, uncut onyx, either mutagen."
     },
     {
-      "name": "TzKal-Zuk",
-      "count": 1,
+      "name": "Sulphur Blades",
+      "count": 4,
       "details": ""
     },
     {
-      "name": "King Black Dragon",
-      "count": 1,
+      "name": "Glacial Temotli from Amoxliatl",
+      "count": 3,
       "details": ""
     },
     {
-      "name": "Corporeal Beast",
-      "count": 1,
+      "name": "Black Mask",
+      "count": 2,
       "details": ""
     },
     {
-      "name": "Duke Sucellus",
-      "count": 1,
+      "name": "Dark Bows",
+      "count": 2,
       "details": ""
     },
     {
-      "name": "Scorpia",
+      "name": "Pair of Aranea Boots",
       "count": 1,
       "details": ""
     },
     {
-      "name": "Dagannoth Supreme",
+      "name": "Zombie Axe AND 1 Zombie Helmet",
       "count": 1,
       "details": ""
     },
     {
-      "name": "Giant Mole",
-      "count": 1,
-      "details": ""
+      "name": "Uniques from Demonic Gorillas",
+      "count": 3,
+      "details": "Valid uniques include the zenyte shard, ballista limbs, ballista spring, light frame, heavy frame, and monkey tail."
     },
     {
-      "name": "Vorkath",
+      "name": "Unique from Corporeal Beast",
       "count": 1,
-      "details": ""
+      "details": "Valid uniques include any sigil, spirit shield, holy elixir. ALTS MAY NOT BE USED. You may only kill corp with members of your team."
     },
     {
-      "name": "Yama",
-      "count": 1,
-      "details": ""
+      "name": "Uniques from Callisto/Artio",
+      "count": 2,
+      "details": "Valid uniques include the pet, claws of callisto, dragon 2h sword, dragon pickaxe, voidwaker hilt, and tyrannical ring."
     },
     {
-      "name": "Crazy Archaeologist",
+      "name": "Pair of Aranea Boots",
       "count": 1,
       "details": ""
     },
     {
-      "name": "Hueycoatl",
-      "count": 1,
-      "details": ""
+      "name": "Uniques from Phantom Muspah",
+      "count": 4,
+      "details": "Valid uniques include the pet, ancient icon, and venator shard."
     },
     {
-      "name": "Zalcano",
-      "count": 1,
-      "details": ""
+      "name": "Uniques from Zulrah",
+      "count": 2,
+      "details": "Valid uniques are pet, jar, tanzanite fang, magic fang, serpentine visage, uncut onyx, either mutagen."
     },
     {
-      "name": "Whisperer",
+      "name": "Unique from Sarachnis",
       "count": 1,
-      "details": ""
+      "details": "Valid uniques are the sarachnis cudgel, pet, and jar"
     },
     {
-      "name": "Dagannoth Prime",
-      "count": 1,
+      "name": "Dark Bows",
+      "count": 2,
       "details": ""
     },
     {
-      "name": "The Great Olm",
-      "count": 1,
-      "details": ""
+      "name": "Uniques from Hueycoatl",
+      "count": 2,
+      "details": "Valid uniques include the pet, hueycoatl hide, tome of earth, dragon hunter wand. ALTS MAY NOT BE USED."
     },
     {
-      "name": "Wardens",
-      "count": 1,
-      "details": ""
+      "name": "Uniques from Venenatis/Spindel",
+      "count": 2,
+      "details": "Valid uniques include the pet, fangs of venenatis, dragon 2h sword, dragon pickaxe, voidwaker gem, and treasonous ring."
     },
     {
-      "name": "Kalphite Queen",
-      "count": 1,
+      "name": "Black Mask",
+      "count": 2,
       "details": ""
     },
     {
-      "name": "Callisto",
-      "count": 1,
-      "details": ""
+      "name": "Uniques from Commander Zilyana",
+      "count": 2,
+      "details": "Valid uniques include the pet, saradomin sword, saradomin light, armadyl crossbow, and saradomin hilt."
     },
     {
-      "name": "Obor",
-      "count": 1,
-      "details": ""
+      "name": "Uniques from Hunllef",
+      "count": 2,
+      "details": "Valid uniques include the pet, crystal weapon seed, crystal armor seed, enhanced crystal weapon seed."
     },
     {
-      "name": "Tempoross",
-      "count": 1,
-      "details": ""
+      "name": "Uniques from Kalphite Queen",
+      "count": 3,
+      "details": "Valid uniqes include the KQ head (tattered does not count), dragon pickaxe, dragon 2h sword, and dragon chainbody."
     },
     {
-      "name": "Dagannoth Prime",
-      "count": 1,
-      "details": ""
+      "name": "Uniques from Kree'arra",
+      "count": 2,
+      "details": "Valid uniques include pet, armadyl helm, armadyl chainskirt, armadyl chestplate, and armadyl hilt."
     },
     {
-      "name": "Alchemical Hydra",
-      "count": 1,
-      "details": ""
+      "name": "Uniques from Moons of Peril",
+      "count": 4,
+      "details": "Valid uniques include any armor piece or weapon. Atlatl darts do not count."
     }
   ]
 }

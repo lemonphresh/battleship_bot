@@ -152,15 +152,18 @@ async def view_enemy_board(ctx):
         await ctx.send("Could not detect your team.")
         return
 
-    opponent = config.TEAM_DISPLAY[config.TEAM_PAIRS.get(team)]
+    opponent = config.TEAM_PAIRS.get(team)
+    
     if not opponent:
         await ctx.send("No opponent defined for your team.")
         return
 
+    opponent_display = config.TEAM_DISPLAY[opponent]
+
     board = load_or_generate_board(opponent)
     preview = render_board_with_shots(board, reveal_ships=False)
 
-    await ctx.send(f"⚓ Behold the enemy waters of **{opponent.upper()}**! Prepare to chart your course and strike true!")
+    await ctx.send(f"⚓ Behold the enemy waters of **{opponent_display}**! Prepare to chart your course and strike true!")
     await ctx.send(preview)
 
 @bot.command()
@@ -262,9 +265,10 @@ async def board_status(ctx, team: str):
         await ctx.send("❌ You need the `refs` role to use this command.")
         return
 
-    team = team.lower()
-    if team not in ["annebonny", "maryread"]:
-        await ctx.send("❌ Invalid team. Use `anneBonny` or `maryRead`.")
+    valid_teams = [t for t in config.TEAMS_LIST]
+    team = team
+    if team not in valid_teams:
+        await ctx.send(f"❌ Invalid team. Use one of: {', '.join(valid_teams)}.")
         return
 
     board = load_board(team) 
@@ -335,7 +339,7 @@ async def use_skip(ctx):
         await ctx.send(f"⚠️ Your last shot at **{last['coord']}** was a hit — skips are only usable after misses.")
         return
 
-    # Check and consume skip token
+    # check and consume skip token
     tokens = load_skip_tokens()
     if tokens.get(team, 0) <= 0:
         await ctx.send(f"❌ {config.TEAM_DISPLAY[team]} has no skip tokens remaining.")
@@ -344,7 +348,7 @@ async def use_skip(ctx):
     tokens[team] -= 1
     save_skip_tokens(tokens)
 
-    # Clear cooldown
+    # clear cooldown
     if team in last_shot_time:
         del last_shot_time[team]
 
@@ -361,10 +365,10 @@ async def current_task(ctx):
         await ctx.send("Could not detect your team.")
         return
 
-    boards = {
-        "anneBonny": load_board("anneBonny") if board_exists("anneBonny") else None,
-        "maryRead": load_board("maryRead") if board_exists("maryRead") else None
-    }
+    boards = {}
+    for t in config.TEAMS_LIST:
+        if board_exists(t):
+            boards[t] = load_board(t)
 
     await current_task_command(team, boards, ctx)
 
@@ -375,10 +379,11 @@ async def select(ctx, coord: str):
         await ctx.send("You're not on a team.")
         return
 
-    boards = {
-        "anneBonny": load_board("anneBonny") if board_exists("anneBonny") else None,
-        "maryRead": load_board("maryRead") if board_exists("maryRead") else None
-    }
+    boards = {}
+    for t in config.TEAMS_LIST:
+        if board_exists(t):
+            boards[t] = load_board(t)
+
     # normalize coordinate format
     coord = coord.upper().replace(",", "")
     result = handle_tile_selection(ctx.bot, team, coord, boards, config.TEAM_CHANNELS)
@@ -392,15 +397,93 @@ async def select(ctx, coord: str):
     opponent_channel = bot.get_channel(result["opponent_channel"])
 
 
-    refs_role = discord.utils.get(ctx.guild.roles, name="attn refs")
+    refs_role = discord.utils.get(ctx.guild.roles, name="refs")
     if refs_role:
         role_mention = refs_role.mention
     else:
-        role_mention = "@attn refs"  # fallback in case role not found
+        role_mention = "@refs"  # fallback in case role not found
 
     # aaaand now send messages
+    if result["team_img"]:
+        try:
+            with open(result["team_img"], "rb") as f:
+                picture = discord.File(f)
+                await team_channel.send(file=picture)
+        except FileNotFoundError:
+            print("no image associated with this message")
     await team_channel.send(result["team_msg"] + f"\n\n ||{role_mention}||")
+
+    if result["opponent_img"]:
+        try:
+            with open(result["opponent_img"], "rb") as f:
+                picture = discord.File(f)
+                await team_channel.send(file=picture)
+        except FileNotFoundError:
+            print("no image associated with this message")    
     await opponent_channel.send(result["opponent_msg"])
+
+@bot.command(name="refsguide")
+async def refs_guide(ctx):
+    if not user_has_refs_role(ctx):
+        await ctx.send("❌ You need the `refs` role to use this command.")
+        return
+
+    msg1 = (
+        "## 🛠️ **Ref's Quick Guide — Running Battleship EG Edition** ⚓\n\n"
+        "This is your simplified checklist to make the event run smoothly. Read the full README for details, "
+        "but these are the key steps to get the game underway."
+    )
+
+    msg2 = (
+        "### 1️⃣ **Set Up the Boards**\n"
+        "• Run the bot with `python bot.py`.\n"
+        "• Boards for each team auto-generate (or load existing ones).\n"
+        "• Double-check `TEAM_PAIRS` is correct in `config.py` — teams should be properly matched."
+    )
+
+    msg3 = (
+        "### 2️⃣ **Ship Placement Phase**\n"
+        "• Boards are **unlocked** by default — teams use `!place` and `!remove` to arrange ships.\n"
+        "• Run `!intro` to broadcast instructions to the team channels.\n"
+        "• When satisfied, run `!lockboard` in each team channel to lock their boards."
+    )
+
+    msg4 = (
+        "### 3️⃣ **Pre-Battle Announcements**\n"
+        "• Once both boards are locked, run `!taskrules` to broadcast task rules.\n"
+        "• Follow up with `!beginbattle` to send gameplay commands and officially start the battle."
+    )
+
+    msg5 = (
+        "### 4️⃣ **Gameplay Loop**\n"
+        "• Teams fire shots with `!select [coordinate]`.\n"
+        "• Cooldowns prevent spam — shot results post in both team channels.\n"
+        "• Teams must complete tile tasks and post proof in their drops channels."
+    )
+
+    msg6 = (
+        "### 5️⃣ **Random Events (Optional)**\n"
+        "• Use `!eventstart [eventtype]` to trigger events for all teams.\n"
+        "• When an event concludes, run `!eventend [eventtype] complete|fail` in that team's channel to resolve it.\n\n"
+        "*Skip Reward:* Occurs on ocean tiles — success grants a skip token.\n"
+        "*No Damage Reward:* Occurs on ship tiles — success restores the tile, failure destroys it."
+    )
+
+    msg7 = (
+        "### 6️⃣ **Ending the Game**\n"
+        "• When a team sinks all enemy ships and completes required tasks, run `!win [teamSlug]`.\n"
+        "• This sends dramatic victory messages to both teams and spectators.\n"
+        "• Celebrate like true pirates! 🏴‍☠️"
+    )
+
+    await ctx.send(msg1)
+    await ctx.send(msg2)
+    await ctx.send(msg3)
+    await ctx.send(msg4)
+    await ctx.send(msg5)
+    await ctx.send(msg6)
+    await ctx.send(msg7)
+
 
 @bot.command(name="intro")
 async def intro(ctx):
@@ -409,10 +492,9 @@ async def intro(ctx):
         return
     
     intro_message = (
-        "# 🦜 **Ahoy, Captains! Welcome to Battleship: EG Edition!** ⚓\n\n"
+        f"# 🦜 **Ahoy, Captains! Welcome to Battleship: EG Edition!** ⚓\n\n"
         "The high seas await, and war is brewing on the waves! Each team commands a mighty fleet, hidden away on secret boards. "
         "Your mission? Outsmart, outmaneuver, and out-blast your foes in a battle of brains and bravery.\n\n"
-        "You are on **{config.TEAM_DISPLAY[get_team_from_channel(ctx.channel.id)]}**\n\n"
         "**Here’s how your voyage will unfold:**\n\n"
         "1. **Chart Your Waters:** Each team is assigned a hidden board — your home port. Your ships must be placed in secret across the 10x10 grid. "
         "Work with your crew to position them wisely. Sabotage awaits the sloppy! ~~and sloppy awaits the saboteurs~~\n\n"
@@ -442,16 +524,20 @@ async def intro(ctx):
         [f"{ship.title()} ({size} tiles): {SHIP_EMOJIS.get(ship, '⬜') * size}" for ship, size in SHIP_TYPES.items()]
     ) + "\n⚓ ⚓ ⚓"
 
-    boards = {
-        "anneBonny": load_board("anneBonny") if board_exists("anneBonny") else None,
-        "maryRead": load_board("maryRead") if board_exists("maryRead") else None
-    }
+    boards = {}
+    for t in config.TEAMS_LIST:
+        if board_exists(t):
+            boards[t] = load_board(t)
+
 
     for team, channel_id in config.TEAM_CHANNELS.items():
         channel = bot.get_channel(int(channel_id))
+        team_announcement = f"## You are on **{config.TEAM_DISPLAY[team]}**!\n\n"
+
         if channel:
             try:
                 await channel.send(intro_message)
+                await channel.send(team_announcement)
                 await channel.send(command_guide)
                 await channel.send(shiptypes_description)
                 preview = render_board_preview(boards[team], required_ships=required_ships)
@@ -459,6 +545,73 @@ async def intro(ctx):
                 await channel.send(preview)
             except discord.Forbidden:
                 print(f"Missing permission to send messages in channel {channel.name}")
+
+@bot.command(name="taskrules")
+async def task_rules(ctx):
+    if not user_has_refs_role(ctx):
+        await ctx.send("❌ You need the `refs` role to use this command.")
+        return
+
+    msg1 = (
+        "## ⚓ **Ship Tile Task Rules: Plan Your Voyage Wisely!** 🏴‍☠️\n\n"
+        "The full list of possible ship tile tasks has been revealed! Use this to your crew's advantage — chart your course, farm supplies, and be ready when the cannons fire.\n"
+        "*But heed these rules carefully, lest the seas turn against you...*"
+    )
+
+    msg2 = (
+        "### 🗺️ **Task Hoarding Restrictions**\n\n"
+        "You may only store *one (1) task item per type* for the duration of the entire event.\n\n"
+        "\"Per type\" means by category/boss, not by specific item name.\n\n"
+        "**Example:**\n"
+        "✅ You can store a Bandos Hilt to complete a future Bandos task.\n"
+        "❌ If you have that, you cannot also store a Bandos Chestplate — it's a different item from the same boss."
+    )
+
+    msg3 = (
+        "### 🧭 **Category Examples**\n\n"
+        "**Task Type    — Allowed to Store**\n"
+        "`Bandos`        — One (1) Bandos Hilt\n"
+        "`Zulrah`        — One (1) Serp Visage\n"
+        "`DKs`           — One (1) Dragon Axe\n"
+        "You cannot store alternative items, partials, or stack multiples. One item, one type — plan wisely.\n\n"
+        "**However**, you *may* stack as many caskets as you like throughout the event.\n"
+        "You will need to provide starting clue KC and starting in-bank casket stacks (if applicable) at the start of the event."
+    )
+
+    msg4 = (
+        "### ⏳ **Tactical Advantage**\n\n"
+        "Lower-level sailors can farm their target items ahead of time.\n"
+        "High-level raiders can focus on the more dangerous waters.\n\n"
+        "But remember: once you’ve got your one item for a task type, you’re done farming that category — any extras or alternates won’t count!"
+    )
+
+    msg5 = (
+        "### ⚠️ **Poseidon's Warning**\n\n"
+        "Any crew found bending the rules, stacking extras, or sneaking in forbidden items will face the wrath of the Refs — "
+        "and possibly a visit to Davy Jones’ Locker!! 👻"
+    )
+
+    msg6 = (
+        "### 🎯 **Summary**\n\n"
+        "Plan ahead. Farm smart. Store wisely.\n"
+        "And may the tides favor the prepared. 🏴‍☠️"
+    )
+
+    for team, channel_id in config.TEAM_CHANNELS.items():
+        channel = bot.get_channel(int(channel_id))
+        if channel:
+            try:
+                await channel.send(msg1)
+                await channel.send(msg2)
+                await channel.send(msg3)
+                await channel.send(msg4)
+                await channel.send(msg5)
+                await channel.send(msg6)
+            except discord.Forbidden:
+                print(f"Missing permission to send messages in {channel.name}")
+
+    await ctx.send("📣 Task rules broadcasted to all team channels!")
+
 
 @bot.command(name="beginbattle")
 async def begin_battle(ctx):
@@ -533,7 +686,7 @@ async def refs_battleship_commands(ctx):
         await ctx.send("❌ You need the `refs` role to use this command.")
         return
 
-    embed = discord.Embed(title="Refs-Only Battleship Commands", color=0xe74c3c)
+    embed = discord.Embed(title="Refs-Only Battleship Commands", color=0x808080)
     
     embed.add_field(name="!lockboard [team]", value="Lock a team's board to prevent further changes.", inline=False)
     embed.add_field(name="!unlockboard [team]", value="Unlock a team's board to allow changes.", inline=False)
@@ -584,6 +737,19 @@ async def start_event(ctx, event_type: str):
             f"{events_data[event_type]['details']}\n\n"
             f"⏳ You must complete your task <t:{unix_timestamp}:R>, or the sea shall claim that tile!"
         )
+    
+    # Spectator Announcement
+    spec_channel = bot.get_channel(config.SPECTATOR_CHANNEL_ID)
+    if spec_channel:
+        embed = discord.Embed(
+            title="🌊 A Strange Disturbance Ripples Across the Seas!",
+            description=(
+            f"The event **{event_type.upper()}** {events_data[event_type]['emoji']} has begun for all crews.\n"
+            f"Watch the waves — this may change the tides!"
+            ),
+            color=0xFF69B4  # pink
+        )
+        await spec_channel.send(embed=embed)
 
     await ctx.send(f"📣 `{event_type}` event has been launched across all teams.")
 
@@ -602,7 +768,7 @@ async def end_event(ctx, event_type: str, result: str):
         await ctx.send("⚠️ Could not determine team from this channel.")
         return
 
-    # Load event data
+    # load event data
     try:
         with open("data/random_events.json") as f:
             events_data = json.load(f)
@@ -617,13 +783,18 @@ async def end_event(ctx, event_type: str, result: str):
 
     reward = event_def.get("reward")
 
-    # Resolve the event
+    # resolve the event
     success = resolve_event_on_board(event_type, team, result, events_data=events_data)
     if not success:
         await ctx.send(f"⚠️ No active `{event_type}` event found to resolve for `{team}`.")
         return
+    
+    team_display = config.TEAM_DISPLAY[team]
+    spec_channel = bot.get_channel(config.SPECTATOR_CHANNEL_ID)
 
-    # Messaging logic
+
+
+    # messaging logic
     if result == "complete":
         if reward == "skip":
             await ctx.send(
@@ -637,6 +808,15 @@ async def end_event(ctx, event_type: str, result: str):
                 f"✅ **{event_type.title()} Event Complete!**\n\n"
                 f"Your crew faced the tide and triumphed. The menace has been repelled — your ship remains afloat! ⛵"
             )
+            
+        if spec_channel:
+            color = config.TEAM_COLORS[team]
+            embed = discord.Embed(
+                title=f"✅ {event_type.title()} Complete!",
+                description=f"**{team_display}** triumphed over the challenge!",
+                color=color
+            )
+            await spec_channel.send(embed=embed)
     else:  # result == "fail"
         if reward == "skip":
             await ctx.send(
@@ -649,6 +829,15 @@ async def end_event(ctx, event_type: str, result: str):
                 f"A dark fate befalls your fleet. The ocean has claimed its toll... a ship tile is lost to the deep. ⚓"
             )
 
+        if spec_channel:
+            color = config.TEAM_COLORS[team]
+            embed = discord.Embed(
+                title=f"💀 {event_type.title()} Failed!",
+                description=f"**{team_display}** failed to overcome the challenge!",
+                color=color
+            )
+            await spec_channel.send(embed=embed)
+
     ctx.send(f"{event_type} event resolved for {team}: {result}")
 
 @bot.command()
@@ -657,14 +846,11 @@ async def matchsummary(ctx):
         await ctx.send("❌ You need the `refs` role to use this command.")
         return
 
-    try:
-        boardA = load_board("anneBonny")
-        boardB = load_board("maryRead")
-    except Exception:
-        await ctx.send("❌ Failed to load one or both boards.")
-        return
+    boards = {}
+    for t in config.TEAMS_LIST:
+        boards[t] = load_board(t)
 
-    summary = generate_match_summary(boardA, boardB)
+    summary = generate_match_summary(boards)
     await announce_to_spectators(ctx.bot, summary)
 
     await ctx.send("📣 Match summary sent to the spectator channel!")
@@ -679,7 +865,7 @@ async def win(ctx, winner: str):
 
     loser = config.TEAM_PAIRS.get(winner)
     if not winner or not loser:
-        await ctx.send("⚠️ Invalid team. Usage: `!win anneBonny` or `!win maryRead`")
+        await ctx.send(f"⚠️ Invalid team. Use one of: {', '.join(config.TEAMS_LIST)}.")
         return
 
     try:
@@ -693,12 +879,12 @@ async def win(ctx, winner: str):
     winner_name = config.TEAM_DISPLAY[winner]
     loser_name = config.TEAM_DISPLAY[loser]
 
-    # 🏴‍☠️ Pirate GIFs
+    # pirate GIFs
     WIN_GIF = "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMWlqdmpzMHg1ZW0wZWo2NDh6NzkzMHA2M280ZDhrdHN0YTgybHd3diZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/10X22vzgNamaiI/giphy.gif"
     LOSE_GIF = "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExNjdramN2cHZzdmMzZDZ6Z2NnaXNhdXc4d250YTd2YnV0cjF4Z3RpeiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/KdkAUTLT0TJBofZDOc/giphy.gif"
     SPECTATOR_GIF = "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExYnVjY3pjNDk1YTg5ZGpvcGJ0bDFjeHR3YzZ0aHFybHF5cWFsanIybSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/dCM60S7zcatpm8lTvB/giphy.gif"
 
-    # 🏆 Winning message
+    # 🏆 winning message
     win_embed = discord.Embed(
         title="🏴‍☠️ Victory, me hearties!",
         description=(
@@ -709,7 +895,7 @@ async def win(ctx, winner: str):
     )
     win_embed.set_image(url=WIN_GIF)
 
-    # 💔 Losing message
+    # 💔 losing message
     lose_embed = discord.Embed(
         title="💧 A noble fight, sailors.",
         description=(
@@ -720,7 +906,7 @@ async def win(ctx, winner: str):
     )
     lose_embed.set_image(url=LOSE_GIF)
 
-    # 📣 Spectator message
+    # 📣 spectator message
     spec_embed = discord.Embed(
         title="🎙️ THE BATTLE IS OVER!",
         description=(
@@ -728,13 +914,13 @@ async def win(ctx, winner: str):
             f"📉 **{loser_name}** fought fiercely, but the tide was cruel.\n\n"
             f"📊 **Match Summary:**\n\n{summary}"
         ),
-        color=0x1E90FF
+        color=0x800080  # purple
     )
     spec_embed.set_image(url=SPECTATOR_GIF)
 
     await ctx.send("📣 Sending post-match messages...")
 
-    # Send messages
+    # send messages
     winner_channel = bot.get_channel(config.TEAM_CHANNELS[winner])
     loser_channel = bot.get_channel(config.TEAM_CHANNELS[loser])
     spec_channel = bot.get_channel(config.SPECTATOR_CHANNEL_ID)

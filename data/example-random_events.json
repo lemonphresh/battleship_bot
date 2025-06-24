@@ -2,7 +2,19 @@
   "kraken": {
     "emoji": "🐙",
     "details": "The Kraken stirs! To defend your ship, collect 7 separate cannonball drops from bosses and obtain normal, oak, teak, and mahogany planks from boss drops.",
+    "duration_hours": 24,
+    "reward": "no damage"
+  },
+  "galvek": {
+    "emoji": "🐉",
+    "details": "Galvek strikes! Each team must post their top 3 fastest KC times. Only the swift will survive.",
     "duration_hours": 12,
+    "reward": "skip"
+  },
+  "tempoross": {
+    "emoji": "🌊",
+    "details": "A storm brews! Tempoross challenges you to earn the most solo points in a single run. Post your score!",
+    "duration_hours": 6,
     "reward": "skip"
   }
 }

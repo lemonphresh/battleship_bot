@@ -1,97 +1,97 @@
 {
   "carrier": [
     {
-      "name": "Carrier Tile 1",
+      "name": "Unique from Chambers of Xeric",
       "count": 1,
-      "details": "This is a tile of the carrier ship."
+      "details": "Valid uniques are any purple, kit, or dust. The uniques must be acquired under a member of your team's name. There are NO alts allowed but scaling is allowed. Take a screenshot at the end of the raid with the party size and raid panel to prove that alts were not used."
     },
     {
-      "name": "Carrier Tile 2",
-      "count": 1,
-      "details": "This is a tile of the carrier ship."
+      "name": "Completions of the Inferno",
+      "count": 3,
+      "details": "These completions must be done by UNIQUE team members."
     },
     {
-      "name": "Carrier Tile 3",
+      "name": "Revenants Unique",
       "count": 1,
-      "details": "This is a tile of the carrier ship."
+      "details": "This means _any_ unique. Weapons, avarice, totems all count, but they _cannot_ be obtained from a Revenant boss."
     },
     {
-      "name": "Carrier Tile 4",
-      "count": 1,
-      "details": "This is a tile of the carrier ship."
+      "name": "Penance Queen",
+      "count": 5,
+      "details": "Have one person take a TIMESTAMPED photo after killing penance queen. You must kill her 5 times. Additionally, kill 1000 chompies. Post timestamped before and after screenshots of your killcount."
     },
     {
-      "name": "Carrier Tile 5",
+      "name": "Unique from Tombs of Amascut",
       "count": 1,
-      "details": "This is a tile of the carrier ship."
+      "details": "Valid uniques are any purple. The uniques must be acquired under a member of your team's name."
     }
   ],
   "battleship": [
     {
-      "name": "Battleship Tile 1",
-      "count": 1,
-      "details": "This is a tile of the battleship."
+      "name": "Million GP Worth of Uniques from Any Boss, Raid, etc.",
+      "count": 150,
+      "details": "The uniques must be acquired under a member of your team's name. Uniques are classified as any item in the collection log. DT2 axe pieces count for 1/4 of the SRA, vestiges count as their respective ring minus the cost to make them. DT2 ORBs count. Contracts from Yama count for their GE value. Oathplate shards count. Noxious halberd pieces count for 1/3 the halberds GE value and the araxxyte fangs counts as the rancour minus the cost to make it."
     },
     {
-      "name": "Battleship Tile 2",
+      "name": "Unique from Theatre of Blood",
       "count": 1,
-      "details": "This is a tile of the battleship."
+      "details": "Valid uniques are any purple, HMT kit, or HMT dust. The unique must be in a member of your team's name."
     },
     {
-      "name": "Battleship Tile 3",
-      "count": 1,
-      "details": "This is a tile of the battleship."
+      "name": "Uniques from Elite Clues",
+      "count": 5,
+      "details": "However, if you have NOT YET DESTROYED a ship, you only need to get one (1) unique."
     },
     {
-      "name": "Battleship Tile 4",
+      "name": "Purple from ANY Raid",
       "count": 1,
-      "details": "This is a tile of the battleship."
+      "details": "Valid uniques are any purple. The uniques must be acquired under a member of your team's name. There are NO alts allowed but scaling chambers is allowed. If you do CoX, take a screenshot at the end of the raid with the party size and raid panel to prove that alts were not used."
     }
   ],
   "cruiser": [
     {
-      "name": "Cruiser Tile 1",
+      "name": "Unique from Tombs of Amascut",
       "count": 1,
-      "details": "This is a tile of the cruiser."
+      "details": "Valid uniques are any purple. The unique must be in a member of your team's name."
     },
     {
-      "name": "Cruiser Tile 2",
-      "count": 1,
-      "details": "This is a tile of the cruiser."
+      "name": "Uniques from the Fortis Colosseum",
+      "count": 2,
+      "details": "Valid uniques are Tonalztics of ralos, echo crystal, uncut onyx, sunfire armor"
     },
     {
-      "name": "Cruiser Tile 3",
+      "name": "Complete Odium or Malediction Ward",
       "count": 1,
-      "details": "This is a tile of the cruiser."
+      "details": ""
     }
   ],
   "submarine": [
     {
-      "name": "Submarine Tile 1",
+      "name": "Unique from the Chambers of Xeric",
       "count": 1,
-      "details": "This is a tile of the submarine."
+      "details": "Valid uniques are any purple, kit, or dust. The uniques must be acquired under a member of your team's name. There are NO alts allowed but scaling is allowed. Take a screenshot at the end of the raid with the party size and raid panel to prove that alts were not used."
     },
     {
-      "name": "Submarine Tile 2",
+      "name": "Tormented Demon Unique",
       "count": 1,
-      "details": "This is a tile of the submarine."
+      "details": "Either a tormented synapse or burning claw"
     },
     {
-      "name": "Submarine Tile 3",
+      "name": "Unique from Nex OR 350 Nihil Shards",
       "count": 1,
-      "details": "This is a tile of the submarine."
+      "details": "The unique must be in a member of your team's name. You MAY kill nex with members outside your team if necessary. Take screenshots of your nihil shards and submit them all ONLY once you have 350"
     }
   ],
   "destroyer": [
     {
-      "name": "Destroyer Tile 1",
+      "name": "Unique from Yama OR 120 Oathplate shards",
       "count": 1,
-      "details": "This is a tile of the destroyer."
+      "details": "You may only Yama with members of your team. Take screenshots of your oathplate shards and submit them all ONLY once you have 120"
     },
     {
-      "name": "Destroyer Tile 2",
+      "name": "Piece of a Voidwaker OR wilderness boss ring",
       "count": 1,
-      "details": "This is a tile of the destroyer."
+      "details": "This can be any piece of a voidwaker or any of the three rings."
     }
   ]
 }

@@ -9,7 +9,15 @@ TEAMS_LIST = [
     "maryRead", 
     # "teamC",
     # "teamD"
-    ]
+]
+
+TEAM_COLORS = {
+    "anneBonny": 0x1ABC9C,  # teal
+    "maryRead": 0xFFA500, # orange
+    # "teamC": 0x0000FF,  # blue
+    # "teamD": 0xFF0000,  # red
+}
+
 TEAM_PAIRS = {
         "anneBonny": "maryRead",
         "maryRead": "anneBonny",
@@ -22,12 +30,15 @@ TEAM_DISPLAY = {
     "maryRead": "Mary Read’s Crew"
 }
 
+# these are in our private disc
 TEAM_CHANNELS = {
     "anneBonny": ,  # replace with actual channel IDs
     "maryRead": 
 }
 
 SPECTATOR_CHANNEL_ID =   # your #spectator-channel ID
+
+
 
 TOKEN = os.getenv("DISCORD_TOKEN")
 

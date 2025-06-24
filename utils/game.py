@@ -2,6 +2,7 @@ import json
 import os
 import random
 import asyncio
+import discord
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
@@ -18,14 +19,20 @@ SHIP_EMOJIS = {
     "destroyer": "⬛"     # black square
 }
 WATER_EMOJI = "🟦"  # blue square for unplaced water tile
+MARY_READ_COLOR = 0xFFA500  # orange
+ANNE_BONNY_COLOR = 0x1ABC9C  # teal
 
 COOLDOWN_DISABLED = True # set to True to disable cooldown for testing
 
 # Global cooldown tracker
 last_shot_time = {}
 
-def generate_match_summary(maryRead_board, anneBonny_board):
-    def summarize(board, team_name):
+def generate_match_summary(boards):
+    """
+    Accepts a dict of boards where keys are team slugs and values are their board data.
+    Generates a summary for each team.
+    """
+    def summarize(board, team_display_name):
         shots = board.get("shots", {})
         hits = [s for s in shots.values() if s["hit"]]
         total = len(shots)
@@ -34,17 +41,46 @@ def generate_match_summary(maryRead_board, anneBonny_board):
             if all(shots.get(c, {}).get("hit") for c in coords)
         )
         accuracy = (len(hits) / total * 100) if total else 0
-        return f"**{team_name.upper()}**\nShots Fired: {total}\nHits: {len(hits)}\nShips Sunk: {sunk}\nAccuracy: {accuracy:.1f}%"
+        return (
+            f"**{team_display_name}**\n"
+            f"> 🔫 Shots Fired: `{total}`\n"
+            f"> 🎯 Hits: `{len(hits)}`\n"
+            f"> 🚢 Ships Sunk: `{sunk}`\n"
+            f"> 🎯 Accuracy: `{accuracy:.1f}%`\n"
+        )
 
-    return "🏁 **Final Match Summary:**\n\n" + "\n\n".join([
-        summarize(maryRead_board, "Anne Bonny's Crew"),
-        summarize(anneBonny_board, "Mary Read's Crew")
-    ])
+    lines = ["🏁 **Final Match Summary:**\n"]
+    for team_slug in config.TEAMS_LIST:
+        board = boards.get(team_slug)
+        if not board:
+            lines.append(f"⚠️ No board found for `{team_slug}`.")
+            continue
+        team_display = config.TEAM_DISPLAY.get(team_slug, team_slug)
+        lines.append(summarize(board, team_display))
 
-async def announce_to_spectators(bot, message):
+    return "\n".join(lines)
+
+async def announce_to_spectators(bot, message, color=None, title=None, image=None):
+    """
+    Sends a message to the spectator channel. If a color is provided, sends an embed. 
+    Otherwise, sends plain text. Optionally attaches an image.
+    """
     channel = bot.get_channel(config.SPECTATOR_CHANNEL_ID)
     if channel:
-        await channel.send(message)
+        if color is not None:
+            embed = discord.Embed(
+                title=title if title else "Spectator Announcement",
+                description=message,
+                color=color
+            )
+            if image:
+                embed.set_image(url=image) if isinstance(image, str) else None
+            await channel.send(embed=embed)
+        else:
+            if image and isinstance(image, str):
+                await channel.send(content=message, embed=discord.Embed().set_image(url=image))
+            else:
+                await channel.send(message)
 
 def is_ship_sunk(board, ship_type):
     ship_coords = board.get("ships", {}).get(ship_type, [])
@@ -76,31 +112,43 @@ def get_last_shot(team):
     if not shots:
         return None
 
+    def parse_ts(ts_str):
+        dt = datetime.fromisoformat(ts_str)
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=timezone.utc)
+        return dt
+
     recent = sorted(
         shots.items(),
-        key=lambda item: datetime.fromisoformat(item[1]["timestamp"]),
+        key=lambda item: parse_ts(item[1]["timestamp"]),
         reverse=True
     )
-
 
     for coord, shot in recent:
         if shot.get("by", "").lower() == team.lower():
             return {
                 "coord": coord,
                 "hit": shot["hit"],
-                "timestamp": shot["timestamp"]
+                "timestamp": parse_ts(shot["timestamp"])
             }
 
     return None
+
 
 
 SKIP_FILE = DATA_DIR / "skip_tokens.json"
 
 def load_skip_tokens():
     if not SKIP_FILE.exists():
-        return {"maryRead": 0, "anneBonny": 0}
+        return {team: 0 for team in config.TEAMS_LIST}
     with open(SKIP_FILE) as f:
-        return json.load(f)
+        data = json.load(f)
+
+    # ensure all teams from config.TEAMS_LIST are present
+    for team in config.TEAMS_LIST:
+        if team not in data:
+            data[team] = 0
+    return data
 
 def save_skip_tokens(tokens):
     with open(SKIP_FILE, "w") as f:
@@ -110,9 +158,15 @@ ACTIVE_SKIP_FILE = DATA_DIR / "active_skips.json"
 
 def load_active_skips():
     if not ACTIVE_SKIP_FILE.exists():
-        return {"maryRead": False, "anneBonny": False}
+        return {team: False for team in config.TEAMS_LIST}
     with open(ACTIVE_SKIP_FILE) as f:
-        return json.load(f)
+        data = json.load(f)
+
+    # ensure all teams from config.TEAMS_LIST are present
+    for team in config.TEAMS_LIST:
+        if team not in data:
+            data[team] = False
+    return data
 
 def save_active_skips(data):
     with open(ACTIVE_SKIP_FILE, "w") as f:
@@ -284,6 +338,9 @@ def can_shoot(team):
     
     now = datetime.now(timezone.utc)
     last = last_shot_time.get(team)
+    if last and last.tzinfo is None:
+        last = last.replace(tzinfo=timezone.utc)
+
     if last and now - last < timedelta(minutes=COOLDOWN_MINUTES):
         remaining = timedelta(minutes=COOLDOWN_MINUTES) - (now - last)
         mins = remaining.seconds // 60
@@ -298,6 +355,8 @@ def handle_tile_selection(bot, selecting_team, target_coord, boards, team_channe
     opposing_team = config.TEAM_PAIRS.get(selecting_team)
     target_board = boards[opposing_team]
     target_coord = target_coord.upper()
+    team_img = None
+    opponent_img = None
 
     tokens = load_skip_tokens()
     active_skips = load_active_skips()
@@ -365,72 +424,98 @@ def handle_tile_selection(bot, selecting_team, target_coord, boards, team_channe
         tile_count = tile.get("count", 0)
 
         result_to_team = (
-            f"### 💥 **Direct hit, Captain!** The enemy’s **{ship_name}** took a blow at **{target_coord}**!\n\n"
-            f"\nYou must vanquish **{tile_count}** **{tile_name}** to complete the strike!"
+            f"## 💥 **Direct hit, Captain!** The enemy’s **{ship_name}** took a blow at **{target_coord}**!\n\n"
+            f"\nYou must acquire **{tile_count}** **{tile_name}** to complete the strike!"
         )
         if tile_details:
             result_to_team += f"\n\n📜 **Additional Details:**\n{tile_details}"
 
         result_to_opponent = (
-            f"### 🚨 **{selecting_team.upper()}** struck your **{ship_name}** at **{target_coord}**!\n\n"
-            f"Hold fast, crew — damage is confirmed! ⚠️"
+            f"## 🚨 **{config.TEAM_DISPLAY[selecting_team]}** struck your **{ship_name}** at **{target_coord}**!\n\n"
+            f"Hold fast, crew! ⚠️"
         )
 
         # SPECTATOR ANNOUNCEMENT: SHOT HIT
-        asyncio.create_task(announce_to_spectators(bot,
-            f"🎯 **{selecting_team.upper()}** landed a hit at **{target_coord}** on **{opposing_team.upper()}**'s waters!"))
-
-        # Check if this sunk the ship
+        asyncio.create_task(announce_to_spectators(
+            bot,
+            f"**{config.TEAM_DISPLAY[selecting_team]}** landed a hit at **{target_coord}** on **{config.TEAM_DISPLAY[opposing_team]}**'s waters!",
+            color=config.TEAM_COLORS[selecting_team],
+            title="🎯 Direct Hit!",
+            image="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExdnY1ZDByNWJ1YmplbXBxOXNiZmh1cWY2M3NpbHVqazNibDd5a2I3MSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/c41Vg6E0tqOuxk32rH/giphy.gif"
+        ))
+        # check if this sunk the ship
         if ship_type and is_ship_sunk(target_board, ship_type):
             result_to_team += f"\n\n🔥 **You sunk the enemy’s {ship_name}!** 💥"
             result_to_opponent += f"\n\n💥 **Your {ship_name} has been sunk!** Prepare to patch the hull!"
 
             # SPECTATOR ANNOUNCEMENT: SHIP SUNK
-            asyncio.create_task(announce_to_spectators(bot,
-                f"💀 **{selecting_team.upper()}** has sunk **{opposing_team.upper()}**'s **{ship_name}!**"))
+            asyncio.create_task(announce_to_spectators(
+                bot,
+                f"💀 **{config.TEAM_DISPLAY[selecting_team]}** has sunk **{config.TEAM_DISPLAY[opposing_team]}**'s **{ship_name}!**",
+                color=config.TEAM_COLORS[selecting_team],
+                title="🏴‍☠️ Final Blow Landed!",
+                image="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExa2c5NzR2dHYxYTI0YXRsOGttdDVmNW84eDBiZGh1NnRwZno4ejJsMSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/JlR1TxQqjVLna/giphy.gif"
+            ))
 
         if all_enemy_ships_sunk(target_board):
             result_to_team += "\n\n## 🏁 **Victory is near!** Complete this task to claim the seas!"
             result_to_opponent += "\n\n## 💀 **Critical hit!** Your final ship tile has been struck! You still have a chance to claim the seas, the game isn't over until they complete their task!"
 
             # SPECTATOR ANNOUNCEMENT: FINAL STRIKE
-            asyncio.create_task(announce_to_spectators(bot,
-                f"🏴‍☠️ **{selecting_team.upper()}** has struck the final ship tile of **{opposing_team.upper()}**! If they complete the task, the game is theirs!"))
+            asyncio.create_task(announce_to_spectators(
+                bot,
+                f"**{config.TEAM_DISPLAY[selecting_team]}** has struck the final ship tile of **{config.TEAM_DISPLAY[opposing_team]}**! If they complete the task, the game is theirs!",
+                color=0xFFD700,
+                title="🏴‍☠️ Final Blow Landed!",
+                image="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExMW80MXQ0YWF2YWcwYWg2c2YwODBseTBsdzQ5dmgycThlenFjenlubyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Vq6XlTmAK66P80BUU8/giphy.gif"
+            ))
     else:
         tile_name = tile.get("name", "Water")
         tile_details = tile.get("details", "")
         tile_count = tile.get("count", 0)
 
         result_to_team = (
-            f"💨 **Splashdown!** Your shot landed at **{target_coord}**, but hit only water.\n"
-            f"You must vanquish **{tile_count}** **{tile_name}** to shoot again."
+            f"💨 **Splashdown!** Your shot landed at **{target_coord}**, but hit only water.\n\n"
+            f"You must acquire **{tile_count}** **{tile_name}** to shoot again."
         )
         if skip_used:
             result_to_team += "\n\n🎁 **Skip used!** You may fire again immediately."
-        if tile_details:
-            result_to_team += f"\n\n📜 **Additional Details:**\n{tile_details}"
+        if tile_details and tile_details.strip():
+            result_to_team += f"\n\n 📜 **Additional Details:**\n{tile_details}"
 
         result_to_opponent = (
-            f"🛡️ **{selecting_team.upper()}** fired at **{target_coord}**, but missed."
+            f"🛡️ **{config.TEAM_DISPLAY[selecting_team]}** fired at **{target_coord}**, but missed."
         )
 
         # SPECTATOR ANNOUNCEMENT: SHOT MISSED
-        asyncio.create_task(announce_to_spectators(bot,
-            f"🌊 **{selecting_team.upper()}** fired at **{opposing_team.upper()}**'s waters — but missed at **{target_coord}**!"))
+        asyncio.create_task(announce_to_spectators(
+            bot,
+            f"**{config.TEAM_DISPLAY[selecting_team]}** fired at **{config.TEAM_DISPLAY[opposing_team]}**'s waters — but missed at **{target_coord}**.",
+            color=config.TEAM_COLORS[selecting_team],
+            title="🌊 Missed Shot",
+            image="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExeHNtMDV1ZDdycXE4d3F3bHRseTNzbW1zd3BsNDc0cXRxNmptY3hteSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3og0ITfxYUkLNVawrm/giphy.gif"
+        ))
 
     board_preview_for_selecting = render_board_with_shots(target_board, reveal_ships=False)
     board_preview_for_opponent = render_board_with_shots(target_board, reveal_ships=True)
 
     if is_hit: 
-        asyncio.create_task(announce_to_spectators(bot, board_preview_for_selecting + '\n\n'))
+        asyncio.create_task(announce_to_spectators(
+            bot,
+            board_preview_for_selecting,
+            color=config.TEAM_COLORS[selecting_team],
+            title="🗺️ Current Status of " + config.TEAM_DISPLAY[opposing_team] + "'s Waters"
+        ))
+        team_img = "bs_hit.png"  
 
     return {
-        "team_msg": result_to_team + "\n\n🏴‍☠️ Spyglass view:\n\n" + board_preview_for_selecting,
-        "opponent_msg": result_to_opponent + "\n\n🧭 Your waters:\n\n" + board_preview_for_opponent,
+        "team_msg": result_to_team + "\n\n🏴‍☠️ Spyglass view:\n" + board_preview_for_selecting,
+        "opponent_msg": result_to_opponent + "\n\n🧭 Your waters:\n" + board_preview_for_opponent,
         "team_channel": team_selecting_channel,
         "opponent_channel": team_target_channel,
+        "team_img": team_img,
+        "opponent_img": opponent_img
     }
-
 
 # rendering functions
 def render_board_preview(board, required_ships=None):
@@ -485,16 +570,15 @@ def render_board_with_shots(board, reveal_ships=False):
                     line += "🛡️ "  # completed event tile
                 else:
                     line += "⚫ "  # miss marker
+            elif tile.get("name") == "Wreckage":
+                line += "💥 " 
+            elif tile.get("event") and reveal_ships:
+                line += tile.get("emoji", "❓") + " "
+            elif reveal_ships and tile.get("ship"):
+                emoji = SHIP_EMOJIS.get(tile["ship"], "❓")
+                line += emoji + " "
             else:
-                if tile.get("name") == "Wreckage":
-                    line += "💥 " 
-                elif tile.get("event") and reveal_ships:
-                    line += tile.get("emoji", "❓") + " "
-                elif reveal_ships and tile.get("ship"):
-                    emoji = SHIP_EMOJIS.get(tile["ship"], "❓")
-                    line += emoji + " "
-                else:
-                    line += WATER_EMOJI + " "
+                line += WATER_EMOJI + " "
         preview += line + "\n"
     return preview
 
