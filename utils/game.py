@@ -22,7 +22,7 @@ WATER_EMOJI = "🟦"  # blue square for unplaced water tile
 MARY_READ_COLOR = 0xFFA500  # orange
 ANNE_BONNY_COLOR = 0x1ABC9C  # teal
 
-COOLDOWN_DISABLED = True # set to True to disable cooldown for testing
+COOLDOWN_DISABLED = False # set to True to disable cooldown for testing
 
 # Global cooldown tracker
 last_shot_time = {}

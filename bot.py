@@ -532,7 +532,7 @@ async def intro(ctx):
 
     for team, channel_id in config.TEAM_CHANNELS.items():
         channel = bot.get_channel(int(channel_id))
-        team_announcement = f"## You are on **{config.TEAM_DISPLAY[team]}**!\n\n"
+        team_announcement = f"## 🏴‍☠️ You are on **{config.TEAM_DISPLAY[team]}**! 🏴‍☠️\n\n"
 
         if channel:
             try:
@@ -940,6 +940,15 @@ async def on_ready():
     for team in config.TEAMS_LIST:
         print(f"Board for {team} generating or loading...")
         load_or_generate_board(team)
+
+    tokens = load_skip_tokens()
+    save_skip_tokens(tokens)
+
+    # ensure active skips initialized
+    active_skips = load_active_skips()
+    save_active_skips(active_skips)
+
+    print("Skip token and active skip files initialized.")
 
 # Load Ship Definitions
 with open("data/ship_tiles.json") as f:
