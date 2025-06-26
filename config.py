@@ -1,6 +1,6 @@
-from dotenv import load_dotenv
+from dotenv import load_dotenv # type: ignore
 import os
-import discord
+import discord # type: ignore
 
 load_dotenv()
 
@@ -32,11 +32,11 @@ TEAM_DISPLAY = {
 
 # these are in our private disc
 TEAM_CHANNELS = {
-    "anneBonny": ,  # replace with actual channel IDs
-    "maryRead": 
+   
 }
 
 SPECTATOR_CHANNEL_ID =   # your #spectator-channel ID
+
 
 
 

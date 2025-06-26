@@ -2,7 +2,7 @@ import json
 import os
 import random
 import asyncio
-import discord
+import discord # type: ignore
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 

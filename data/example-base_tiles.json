@@ -13,7 +13,7 @@
     {
       "name": "Uniques from Duke Sucellus or Leviathan",
       "count": 2,
-      "details": "Valid uniques include the pet, virtus, vestige, ingot, soul reaper axe piece, or quartz."
+      "details": "Valid uniques include the pet, virtus, vestige, gold ring, ingot, soul reaper axe piece, or quartz."
     },
     {
       "name": "Unique from Sarachnis",
@@ -33,7 +33,7 @@
     {
       "name": "Uniques from Whisperer or Vardorvis",
       "count": 2,
-      "details": "Valid uniques include the pet, virtus, vestige, ingot, soul reaper axe piece, or quartz"
+      "details": "Valid uniques include the pet, virtus, vestige, gold ring, ingot, soul reaper axe piece, or quartz"
     },
     {
       "name": "Uniques from King Black Dragon",
@@ -48,47 +48,47 @@
     {
       "name": "Uniques from Slayer Boss",
       "count": 3,
-      "details": "Valid uniques include any collection log item FROM A SLAYER EXCLUSIVE BOSS. Teleports do not count."
+      "details": "Valid uniques include any collection log item **from a slayer exclusive boss**. Teleports do not count."
     },
     {
       "name": "Uniques from Slayer Boss",
       "count": 3,
-      "details": "Valid uniques include any collection log item FROM A SLAYER EXCLUSIVE BOSS. Teleports do not count."
+      "details": "Valid uniques include any collection log item **from a slayer exclusive boss**. Teleports do not count."
     },
     {
       "name": "Uniques from Slayer Boss",
       "count": 3,
-      "details": "Valid uniques include any collection log item FROM A SLAYER EXCLUSIVE BOSS. Teleports do not count."
+      "details": "Valid uniques include any collection log item **from a slayer exclusive boss**. Teleports do not count."
     },
     {
       "name": "Uniques from Slayer Boss",
       "count": 3,
-      "details": "Valid uniques include any collection log item FROM A SLAYER EXCLUSIVE BOSS. Teleports do not count."
+      "details": "Valid uniques include any collection log item **from a slayer exclusive boss**. Teleports do not count."
     },
     {
       "name": "Uniques from Slayer Boss",
       "count": 3,
-      "details": "Valid uniques include any collection log item FROM A SLAYER EXCLUSIVE BOSS. Teleports do not count."
+      "details": "Valid uniques include any collection log item **from a slayer exclusive boss**. Teleports do not count."
     },
     {
       "name": "Uniques from Slayer Boss",
       "count": 3,
-      "details": "Valid uniques include any collection log item FROM A SLAYER EXCLUSIVE BOSS. Teleports do not count."
+      "details": "Valid uniques include any collection log item **from a slayer exclusive boss**. Teleports do not count."
     },
     {
       "name": "Uniques from Slayer Boss",
       "count": 3,
-      "details": "Valid uniques include any collection log item FROM A SLAYER EXCLUSIVE BOSS. Teleports do not count."
+      "details": "Valid uniques include any collection log item **from a slayer exclusive boss**. Teleports do not count."
     },
     {
       "name": "Unique from Corporeal Beast",
       "count": 1,
-      "details": "Valid uniques include any sigil, spirit shield, holy elixir. ALTS MAY NOT BE USED. You may only kill corp with members of your team."
+      "details": "Valid uniques include the pet, any sigil, spirit shield, holy elixir. **Alts may NOT be used**. You may only kill corp with members of your team."
     },
     {
       "name": "Uniques from Hueycoatl",
-      "count": 2,
-      "details": "Valid uniques include the pet, hueycoatl hide, tome of earth, dragon hunter wand. ALTS MAY NOT BE USED."
+      "count": 3,
+      "details": "Valid uniques include the pet, hueycoatl hide, tome of earth, dragon hunter wand. While hueycoatl hide drops as multiples, it only counts as one drop. **Alts may NOT be used**."
     },
     {
       "name": "Uniques from Moons of Peril",
@@ -98,7 +98,7 @@
     {
       "name": "Uniques from Kalphite Queen",
       "count": 3,
-      "details": "Valid uniqes include the KQ head (tattered does not count), dragon pickaxe, dragon 2h sword, and dragon chainbody."
+      "details": "Valid uniques include the pet, KQ head (tattered does not count), dragon pickaxe, dragon 2h sword, and dragon chainbody."
     },
     {
       "name": "Uniques from Kril Tsutsaroth",
@@ -133,7 +133,7 @@
     {
       "name": "Uniques from Royal Titans",
       "count": 2,
-      "details": "Two element staff pieces"
+      "details": "Two element staff pieces OR the pet."
     },
     {
       "name": "Uniques from Zulrah",
@@ -148,7 +148,7 @@
     {
       "name": "Glacial Temotli from Amoxliatl",
       "count": 3,
-      "details": ""
+      "details": "The pet may also count as a drop, but only if it is the first pet you have received from Amoxliatl. If you have already received the pet, it does not count."
     },
     {
       "name": "Black Mask",
@@ -188,7 +188,7 @@
     {
       "name": "Uniques from Duke Sucellus or Leviathan",
       "count": 2,
-      "details": "Valid uniques include the pet, virtus, vestige, ingot, soul reaper axe piece, or quartz."
+      "details": "Valid uniques include the pet, virtus, vestige, gold ring, ingot, soul reaper axe piece, or quartz."
     },
     {
       "name": "Unique from Sarachnis",
@@ -208,7 +208,7 @@
     {
       "name": "Uniques from Whisperer or Vardorvis",
       "count": 2,
-      "details": "Valid uniques include the pet, virtus, vestige, ingot, soul reaper axe piece, or quartz"
+      "details": "Valid uniques include the pet, virtus, vestige, gold ring, ingot, soul reaper axe piece, or quartz"
     },
     {
       "name": "Uniques from King Black Dragon",
@@ -223,47 +223,47 @@
     {
       "name": "Uniques from Slayer Boss",
       "count": 3,
-      "details": "Valid uniques include any collection log item FROM A SLAYER EXCLUSIVE BOSS. Teleports do not count."
+      "details": "Valid uniques include any collection log item **from a slayer exclusive boss**. Teleports do not count."
     },
     {
       "name": "Uniques from Slayer Boss",
       "count": 3,
-      "details": "Valid uniques include any collection log item FROM A SLAYER EXCLUSIVE BOSS. Teleports do not count."
+      "details": "Valid uniques include any collection log item **from a slayer exclusive boss**. Teleports do not count."
     },
     {
       "name": "Uniques from Slayer Boss",
       "count": 3,
-      "details": "Valid uniques include any collection log item FROM A SLAYER EXCLUSIVE BOSS. Teleports do not count."
+      "details": "Valid uniques include any collection log item **from a slayer exclusive boss**. Teleports do not count."
     },
     {
       "name": "Uniques from Slayer Boss",
       "count": 3,
-      "details": "Valid uniques include any collection log item FROM A SLAYER EXCLUSIVE BOSS. Teleports do not count."
+      "details": "Valid uniques include any collection log item **from a slayer exclusive boss**. Teleports do not count."
     },
     {
       "name": "Uniques from Slayer Boss",
       "count": 3,
-      "details": "Valid uniques include any collection log item FROM A SLAYER EXCLUSIVE BOSS. Teleports do not count."
+      "details": "Valid uniques include any collection log item **from a slayer exclusive boss**. Teleports do not count."
     },
     {
       "name": "Uniques from Slayer Boss",
       "count": 3,
-      "details": "Valid uniques include any collection log item FROM A SLAYER EXCLUSIVE BOSS. Teleports do not count."
+      "details": "Valid uniques include any collection log item **from a slayer exclusive boss**. Teleports do not count."
     },
     {
       "name": "Uniques from Slayer Boss",
       "count": 3,
-      "details": "Valid uniques include any collection log item FROM A SLAYER EXCLUSIVE BOSS. Teleports do not count."
+      "details": "Valid uniques include any collection log item **from a slayer exclusive boss**. Teleports do not count."
     },
     {
       "name": "Unique from Corporeal Beast",
       "count": 1,
-      "details": "Valid uniques include any sigil, spirit shield, holy elixir. ALTS MAY NOT BE USED. You may only kill corp with members of your team."
+      "details": "Valid uniques include the pet, any sigil, spirit shield, holy elixir. **Alts may NOT be used**. You may only kill corp with members of your team."
     },
     {
       "name": "Uniques from Hueycoatl",
-      "count": 2,
-      "details": "Valid uniques include the pet, hueycoatl hide, tome of earth, dragon hunter wand. ALTS MAY NOT BE USED."
+      "count": 3,
+      "details": "Valid uniques include the pet, hueycoatl hide, tome of earth, dragon hunter wand. While hueycoatl hide drops as multiples, it only counts as one drop. **Alts may NOT be used**."
     },
     {
       "name": "Uniques from Moons of Peril",
@@ -273,7 +273,7 @@
     {
       "name": "Uniques from Kalphite Queen",
       "count": 3,
-      "details": "Valid uniqes include the KQ head (tattered does not count), dragon pickaxe, dragon 2h sword, and dragon chainbody."
+      "details": "Valid uniques include the pet, KQ head (tattered does not count), dragon pickaxe, dragon 2h sword, and dragon chainbody."
     },
     {
       "name": "Uniques from Kril Tsutsaroth",
@@ -308,7 +308,7 @@
     {
       "name": "Uniques from Royal Titans",
       "count": 2,
-      "details": "Two element staff pieces"
+      "details": "Two element staff pieces OR the pet."
     },
     {
       "name": "Uniques from Zulrah",
@@ -323,7 +323,7 @@
     {
       "name": "Glacial Temotli from Amoxliatl",
       "count": 3,
-      "details": ""
+      "details": "The pet may also count as a drop, but only if it is the first pet you have received from Amoxliatl. If you have already received the pet, it does not count."
     },
     {
       "name": "Black Mask",
@@ -353,7 +353,7 @@
     {
       "name": "Unique from Corporeal Beast",
       "count": 1,
-      "details": "Valid uniques include any sigil, spirit shield, holy elixir. ALTS MAY NOT BE USED. You may only kill corp with members of your team."
+      "details": "Valid uniques include the pet, any sigil, spirit shield, holy elixir. **Alts may NOT be used**. You may only kill corp with members of your team."
     },
     {
       "name": "Uniques from Callisto/Artio",
@@ -387,8 +387,8 @@
     },
     {
       "name": "Uniques from Hueycoatl",
-      "count": 2,
-      "details": "Valid uniques include the pet, hueycoatl hide, tome of earth, dragon hunter wand. ALTS MAY NOT BE USED."
+      "count": 3,
+      "details": "Valid uniques include the pet, hueycoatl hide, tome of earth, dragon hunter wand. While hueycoatl hide drops as multiples, it only counts as one drop. **Alts may NOT be used**."
     },
     {
       "name": "Uniques from Venenatis/Spindel",
@@ -413,7 +413,117 @@
     {
       "name": "Uniques from Kalphite Queen",
       "count": 3,
-      "details": "Valid uniqes include the KQ head (tattered does not count), dragon pickaxe, dragon 2h sword, and dragon chainbody."
+      "details": "Valid uniques include the pet, KQ head (tattered does not count), dragon pickaxe, dragon 2h sword, and dragon chainbody."
+    },
+    {
+      "name": "Uniques from Kree'arra",
+      "count": 2,
+      "details": "Valid uniques include pet, armadyl helm, armadyl chainskirt, armadyl chestplate, and armadyl hilt."
+    },
+    {
+      "name": "Uniques from Moons of Peril",
+      "count": 4,
+      "details": "Valid uniques include any armor piece or weapon. Atlatl darts do not count."
+    },
+    {
+      "name": "Sulphur Blades",
+      "count": 4,
+      "details": ""
+    },
+    {
+      "name": "Glacial Temotli from Amoxliatl",
+      "count": 3,
+      "details": "The pet may also count as a drop, but only if it is the first pet you have received from Amoxliatl. If you have already received the pet, it does not count."
+    },
+    {
+      "name": "Black Mask",
+      "count": 2,
+      "details": ""
+    },
+    {
+      "name": "Dark Bows",
+      "count": 2,
+      "details": ""
+    },
+    {
+      "name": "Pair of Aranea Boots",
+      "count": 1,
+      "details": ""
+    },
+    {
+      "name": "Zombie Axe AND 1 Zombie Helmet",
+      "count": 1,
+      "details": ""
+    },
+    {
+      "name": "Uniques from Demonic Gorillas",
+      "count": 3,
+      "details": "Valid uniques include the zenyte shard, ballista limbs, ballista spring, light frame, heavy frame, and monkey tail."
+    },
+    {
+      "name": "Unique from Corporeal Beast",
+      "count": 1,
+      "details": "Valid uniques include the pet, any sigil, spirit shield, holy elixir. **Alts may NOT be used**. You may only kill corp with members of your team."
+    },
+    {
+      "name": "Uniques from Callisto/Artio",
+      "count": 2,
+      "details": "Valid uniques include the pet, claws of callisto, dragon 2h sword, dragon pickaxe, voidwaker hilt, and tyrannical ring."
+    },
+    {
+      "name": "Pair of Aranea Boots",
+      "count": 1,
+      "details": ""
+    },
+    {
+      "name": "Uniques from Phantom Muspah",
+      "count": 4,
+      "details": "Valid uniques include the pet, ancient icon, and venator shard."
+    },
+    {
+      "name": "Uniques from Zulrah",
+      "count": 2,
+      "details": "Valid uniques are pet, jar, tanzanite fang, magic fang, serpentine visage, uncut onyx, either mutagen."
+    },
+    {
+      "name": "Unique from Sarachnis",
+      "count": 1,
+      "details": "Valid uniques are the sarachnis cudgel, pet, and jar"
+    },
+    {
+      "name": "Dark Bows",
+      "count": 2,
+      "details": ""
+    },
+    {
+      "name": "Uniques from Hueycoatl",
+      "count": 3,
+      "details": "Valid uniques include the pet, hueycoatl hide, tome of earth, dragon hunter wand. While hueycoatl hide drops as multiples, it only counts as one drop. **Alts may NOT be used**."
+    },
+    {
+      "name": "Uniques from Venenatis/Spindel",
+      "count": 2,
+      "details": "Valid uniques include the pet, fangs of venenatis, dragon 2h sword, dragon pickaxe, voidwaker gem, and treasonous ring."
+    },
+    {
+      "name": "Black Mask",
+      "count": 2,
+      "details": ""
+    },
+    {
+      "name": "Uniques from Commander Zilyana",
+      "count": 2,
+      "details": "Valid uniques include the pet, saradomin sword, saradomin light, armadyl crossbow, and saradomin hilt."
+    },
+    {
+      "name": "Uniques from Hunllef",
+      "count": 2,
+      "details": "Valid uniques include the pet, crystal weapon seed, crystal armor seed, enhanced crystal weapon seed."
+    },
+    {
+      "name": "Uniques from Kalphite Queen",
+      "count": 3,
+      "details": "Valid uniques include the pet, KQ head (tattered does not count), dragon pickaxe, dragon 2h sword, and dragon chainbody."
     },
     {
       "name": "Uniques from Kree'arra",

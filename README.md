@@ -22,7 +22,7 @@ You're ready to go!
 
 4. Run `!taskrules` and then `!beginbattle` once all boards are locked. This will send out the task rules and gameplay commands to the teams.
 
-5. Now, teams can start selecting where to strike on their opponent's board with `!select [coordinates]`. There will be a cooldown after selecting a tile to prevent people from griefing. This will post in both the selecting team's channel and the opposing team's channel to communicate whether there was a hit on a boat or a miss, and it will also explain what the tile entails.
+5. Now, teams can start selecting where to strike on their opponent's board with `!select [coordinates]`. There will be a 10 minute cooldown after selecting a tile to prevent people from griefing. This will post in both the selecting team's channel and the opposing team's channel to communicate whether there was a hit on a boat or a miss, and it will also explain what the tile entails.
 
    5.a. Random events are supported, but optional, in this game. Check `example-random_events.json` to see some examples...
 

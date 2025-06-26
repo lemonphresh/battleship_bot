@@ -1,9 +1,9 @@
-import discord
+import discord # type: ignore
 import config
 import os
 import json
 from datetime import datetime, timedelta, timezone
-from discord.ext import commands
+from discord.ext import commands # type: ignore
 from utils.game import (
     announce_to_spectators, apply_event_to_board, generate_board, generate_match_summary, get_last_shot, handle_tile_selection, current_task_command, load_active_skips, load_skip_tokens, render_board_preview,
     board_path, place_ship_to_file, last_shot_time, remove_ship_from_file, load_board, render_board_with_shots, resolve_event_on_board, save_active_skips, save_skip_tokens
